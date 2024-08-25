@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/07/29 17:52:09 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/08/25 17:27:26 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	loop(t_global *g)
 			break ;
 		lexer(g);
 	}
+	rl_clear_history();
 	return ;
 }

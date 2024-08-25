@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/07/29 17:13:09 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/08/25 18:32:08 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_global	*_global(t_global *g)
 
 void	init_global(t_global *g)
 {
+	_global(g);
 	g->garbage_list = NULL;
 	g->error_no = 1;
 	g->single_quotes = 0;
 	g->double_quotes = 0;
 	g->token_list = NULL;
-	_global(g);
 }
 
 int	main(int ac, char **av, char **env)
