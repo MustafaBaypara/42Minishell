@@ -4,10 +4,10 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-LIB = srcs/libft/
+LIB = srcs/libft
 
 CFILES = srcs/minishell.c srcs/tools/garbagecollector.c srcs/loop.c \
-		srcs/utils/utils.c srcs/exec.c srcs/lexer/lexer.c
+        srcs/utils/utils.c srcs/utils/utils2.c srcs/exec.c srcs/lexer/lexer.c
 
 OBJECTS = $(CFILES:.c=.o)
 
@@ -17,7 +17,7 @@ all: $(NAME)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): libft $(OBJECTS)
-	@$(CC) $(CFLAGS) -L$(LIB) $(LIB)/libft.a -lreadline $(OBJECTS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECTS) -L$(LIB) -lft -lreadline -o $(NAME)
 
 libft:
 	@make -C $(LIB)

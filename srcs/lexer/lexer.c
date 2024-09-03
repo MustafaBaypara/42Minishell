@@ -20,17 +20,25 @@ static void	listing(t_global *g, size_t *j, size_t *i)
 	if (*j > 0)
 	{
 		g->tmp[*j] = '\0';
-		add_list(&g->token_list, g->tmp);
-		printf("%s ***\n", g->tmp);
-		printf("%s ***\n", g->token_list->content);
+		add_list(&g->token_list, check_malloc(ft_strdup(g->tmp)));
 		*j = 0;
+		add_list(&g->garbage_list, ft_lstlast(g->token_list));
 	}
-	else if (*current == '>' && current[*i + 1] == '>')
-		add_list(&g->token_list, ">>");
-	else if (*current == '<' && current[*i + 1] == '<')
-		add_list(&g->token_list, "<<");
+	if (*current == '>' && current[1] == '>')
+	{
+		(*i)++;
+		add_list(&g->token_list, check_malloc(ft_strdup(">>")));
+	}
+	else if (*current == '<' && current[1] == '<')
+	{
+		(*i)++;
+		add_list(&g->token_list, check_malloc(ft_strdup("<<")));
+	}
 	else
-		add_list(&g->token_list, current);
+	{
+		add_list(&g->token_list, check_malloc(ft_strdup("|")));
+	}
+	add_list(&g->garbage_list, ft_lstlast(g->token_list));
 }
 
 static void	lexer_definer(t_global *g, size_t i_len, size_t *j)
@@ -61,6 +69,11 @@ static void	lexer_definer(t_global *g, size_t i_len, size_t *j)
 	}
 }
 
+void	lstprinter(void *lst)
+{
+	printf("%s\n", (char *)lst);
+}
+
 void	lexer(t_global *g)
 {
 	size_t	i_len;
@@ -70,7 +83,11 @@ void	lexer(t_global *g)
 	i_len = ft_strlen(g->command_line);
 	g->tmp = check_malloc(ft_calloc(1, (i_len + 1) * sizeof(char)));
 	lexer_definer(g, i_len, &j);
-	printf("%s\n", g->command_line);
-	printf("%s\n", g->token_list->content);
-	printf("%s\n", g->token_list->next->content);
+	if (j > 0)
+	{
+		g->tmp[j] = '\0';
+		add_list(&g->token_list, check_malloc(ft_strdup(g->tmp)));
+		add_list(&g->garbage_list, ft_lstlast(g->token_list));
+	}
+	ft_lstiter(g->token_list, lstprinter);
 }

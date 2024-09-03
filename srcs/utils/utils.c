@@ -30,7 +30,6 @@ void	error_program(char *str, int err)
 	if (*str)
 		printf("%s\n", str);
 	clear_garbage(&g->garbage_list);
-	system("leaks minishell");
 	exit(err);
 }
 
@@ -45,19 +44,13 @@ t_list	*env_dup(char **env, t_global *g)
 	i = 0;
 	while (env[i])
 	{
-		_env = calloc(1, sizeof(t_env));
-		if (!_env)
-			return (error_program(ERROR_MALLOC, 12), (NULL));
-		tmp = ft_split(env[i], '=');
-		if (!tmp)
-			return (error_program(ERROR_MALLOC, 12), (NULL));
+		_env = check_malloc(ft_calloc(1, sizeof(t_env)));
+		tmp = check_malloc(ft_split_first(env[i], '='));
 		_env->key = tmp[0];
 		_env->value = tmp[1];
-		add_list(&g->garbage_list, _env->key);
 		add_list(&g->garbage_list, _env->value);
-		add_list(&g->garbage_list, _env);
-		add_list(&g->garbage_list, tmp);
-		ft_lstadd_back(&list, add_list(&g->garbage_list, ft_lstnew(_env)));
+		add_list(&g->garbage_list, _env->key);
+		ft_lstadd_back(&list, check_malloc(ft_lstnew(_env)));
 		i++;
 	}
 	return (list);

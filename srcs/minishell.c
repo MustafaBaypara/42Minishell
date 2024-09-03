@@ -44,5 +44,4 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	loop(&global);
 	clear_garbage(&global.garbage_list);
-	system("leaks minishell");
 }

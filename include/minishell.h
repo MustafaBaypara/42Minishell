@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <unistd.h>
+# include "unistd.h"
 # include "../srcs/libft/libft.h"
 # include "shellutils.h"
 # include "errorlib.h"
@@ -26,5 +26,6 @@ void		error_program(char *str, int err);
 t_global	*_global(t_global *g);
 void		*check_malloc(void *ptr);
 void		lexer(t_global *g);
+char		**ft_split_first(const char *s, char c);
 
 #endif
