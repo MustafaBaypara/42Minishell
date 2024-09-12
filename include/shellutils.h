@@ -17,8 +17,31 @@
 
 # include "stdio.h"
 
+typedef enum e_token_types
+{
+	CMD,
+	PIPE,
+	RDR_IN,
+	RDRD_IN,
+	RDR_OUT,
+	HEREDOC
+}	t_token_types;
+
+typedef struct s_command
+{
+	int		int_work;
+	char	**value;
+	char	**redirects;
+	char	*cmdpath;
+	int		fd[2];
+	int		the_fd;
+	int		p_type;
+	int		pid;
+}	t_command;
+
 typedef struct s_global
 {
+	int		control;
 	int		error_no;
 	int		single_quotes;
 	int		double_quotes;

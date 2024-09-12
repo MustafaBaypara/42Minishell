@@ -7,7 +7,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 LIB = srcs/libft
 
 CFILES = srcs/minishell.c srcs/tools/garbagecollector.c srcs/loop.c \
-        srcs/utils/utils.c srcs/utils/utils2.c srcs/exec.c srcs/lexer/lexer.c
+        srcs/utils/utils.c srcs/utils/utils2.c srcs/exec.c srcs/lexer/lexer.c \
+		srcs/parser/parser.c
 
 OBJECTS = $(CFILES:.c=.o)
 

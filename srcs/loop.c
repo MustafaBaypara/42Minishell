@@ -39,6 +39,7 @@ void	loop(t_global *g)
 		if (!i)
 			break ;
 		lexer(g);
+		parser(g)
 	}
 	rl_clear_history();
 	return ;

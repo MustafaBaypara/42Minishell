@@ -39,3 +39,24 @@ char	**ft_split_first(const char *s, char c)
 	result[2] = NULL;
 	return (result);
 }
+
+t_token_types	identifier(char *token)
+{
+	if (ft_strlen(token) == 1)
+	{
+		if (*token == '|')
+			return (PIPE);
+		else if (*token == '<')
+			return (RDR_OUT);
+		else if (*token == '>')
+			return (RDR_IN);
+	}
+	else if (ft_strlen(token) == 2)
+	{
+		if (*token == '<' && *token[1] == '<')
+			return (HEREDOC)
+		if (*token == '>' && *token[1] == '>')
+			return (RDRD_IN);
+	}
+	return (CMD);
+}

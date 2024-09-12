@@ -18,14 +18,16 @@
 # include "shellutils.h"
 # include "errorlib.h"
 
-void		*add_list(t_list **list, void *garbage);
-void		clear_garbage(t_list **lst);
-void		loop(t_global *g);
-t_list		*env_dup(char **env, t_global *g);
-void		error_program(char *str, int err);
-t_global	*_global(t_global *g);
-void		*check_malloc(void *ptr);
-void		lexer(t_global *g);
-char		**ft_split_first(const char *s, char c);
+void			*add_list(t_list **list, void *garbage);
+void			clear_garbage(t_list **lst);
+void			loop(t_global *g);
+t_list			*env_dup(char **env, t_global *g);
+void			error_program(char *str, int err);
+t_global		*_global(t_global *g);
+void			*check_malloc(void *ptr);
+void			lexer(t_global *g);
+char			**ft_split_first(const char *s, char c);
+void			parser(t_global *g);
+t_token_types	identifier(char *token);
 
 #endif
