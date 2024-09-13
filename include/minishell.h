@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/08/25 18:33:38 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:41:48 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ t_list			*env_dup(char **env, t_global *g);
 void			error_program(char *str, int err);
 t_global		*_global(t_global *g);
 void			*check_malloc(void *ptr);
-void			lexer(t_global *g);
 char			**ft_split_first(const char *s, char c);
-void			parser(t_global *g);
 t_token_types	identifier(char *token);
+int				is_white_space(char c);
+// LEXER
+void			lexer(t_global *g);
+
+// PARSER
+void			parser(t_global *g, t_list *token, size_t i, t_command *cmd);
+size_t			token_len(t_list *list);
 
 #endif

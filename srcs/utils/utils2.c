@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_for_env.c                                    :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:35:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/02 20:35:53 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:21:48 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,30 @@ char	**ft_split_first(const char *s, char c)
 	return (result);
 }
 
-t_token_types	identifier(char *token)
+t_token_types	identifier(char *content)
 {
-	if (ft_strlen(token) == 1)
+	if (ft_strlen(content) == 1)
 	{
-		if (*token == '|')
+		if (*content == '|')
 			return (PIPE);
-		else if (*token == '<')
+		else if (*content == '<')
 			return (RDR_OUT);
-		else if (*token == '>')
+		else if (*content == '>')
 			return (RDR_IN);
 	}
-	else if (ft_strlen(token) == 2)
+	else if (ft_strlen(content) == 2)
 	{
-		if (*token == '<' && *token[1] == '<')
-			return (HEREDOC)
-		if (*token == '>' && *token[1] == '>')
+		if (*content == '<' && content[1] == '<')
+			return (HEREDOC);
+		if (*content == '>' && content[1] == '>')
 			return (RDRD_IN);
 	}
 	return (CMD);
+}
+
+int	is_white_space(char c)
+{
+	if (c == 32 || (9 <= c && c <= 13))
+		return (1);
+	return (0);
 }

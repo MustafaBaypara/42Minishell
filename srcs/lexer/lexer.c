@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/08/25 18:35:20 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:13:26 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static void	listing(t_global *g, size_t *j, size_t *i)
 		add_list(&g->token_list, check_malloc(ft_strdup("<<")));
 	}
 	else
-	{
-		add_list(&g->token_list, check_malloc(ft_strdup("|")));
-	}
+		add_list(&g->token_list, check_malloc(ft_substr(current, 0, 1)));
 	add_list(&g->garbage_list, ft_lstlast(g->token_list));
 }
 
@@ -69,9 +67,9 @@ static void	lexer_definer(t_global *g, size_t i_len, size_t *j)
 	}
 }
 
-void	lstprinter(void *lst)
+void	lstprinter(void *content)
 {
-	printf("%s\n", (char *)lst);
+	printf("%s\n", (char *)content);
 }
 
 void	lexer(t_global *g)
@@ -89,5 +87,5 @@ void	lexer(t_global *g)
 		add_list(&g->token_list, check_malloc(ft_strdup(g->tmp)));
 		add_list(&g->garbage_list, ft_lstlast(g->token_list));
 	}
-	ft_lstiter(g->token_list, lstprinter);
+	//ft_lstiter(g->token_list, lstprinter);
 }
