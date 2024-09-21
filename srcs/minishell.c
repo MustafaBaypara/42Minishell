@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/08/25 18:32:08 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:35:15 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_global(t_global *g)
 	g->single_quotes = 0;
 	g->double_quotes = 0;
 	g->token_list = NULL;
+	g->cmd_list = NULL;
 }
 
 int	main(int ac, char **av, char **env)

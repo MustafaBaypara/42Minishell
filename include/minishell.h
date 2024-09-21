@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/13 17:41:48 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:21:30 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void			lexer(t_global *g);
 // PARSER
 void			parser(t_global *g, t_list *token, size_t i, t_command *cmd);
 size_t			token_len(t_list *list);
+size_t			word_end(const char *v, size_t start, int *d, int *s);
+void			toggle_quote(char c, int *in_s, int *in_d);
+int				rdr_position(t_command *cmds);
 
 #endif

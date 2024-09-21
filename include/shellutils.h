@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:37:27 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/13 17:28:25 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:37:50 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,31 @@ typedef enum e_token_types
 
 typedef struct s_command
 {
-	int		is_work;
-	char	**value;
-	char	**redirects;
-	char	*cmdpath;
-	int		fd[2];
-	int		the_fd;
-	int		p_type;
-	int		pid;
+	int					is_work;
+	char				**value;
+	char				**rds;
+	char				*cmdpath;
+	int					fd[2];
+	int					the_fd;
+	int					p_type;
+	int					pid;
+	struct s_command	*next;
 }	t_command;
 
 typedef struct s_global
 {
-	int		control;
-	int		error_no;
-	int		single_quotes;
-	int		double_quotes;
+	int			control;
+	int			error_no;
+	int			single_quotes;
+	int			double_quotes;
 
-	char	*tmp;
-	char	*command_line;
+	char		*tmp;
+	char		*command_line;
 
-	t_list	*token_list;
-	t_list	*garbage_list;
-	t_list	*env;
-	t_list	*cmd_list;
+	t_list		*token_list;
+	t_list		*garbage_list;
+	t_list		*env;
+	t_command	*cmd_list;
 }	t_global;
 
 typedef struct s_env

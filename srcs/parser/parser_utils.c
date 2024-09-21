@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utlis.c                                     :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:35:12 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/13 15:43:12 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:09:20 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,30 @@ size_t	token_len(t_list *list)
 	while (list && identifier(list->content) != PIPE)
 	{
 		len += token_value(list->content);
-		list = list->content;
+		list = list->next;
 	}
 	return (len);
+}
+
+void	toggle_quote(char c, int *in_s, int *in_d)
+{
+	if (c == '\'' && !(*in_d))
+		*in_s = !(*in_s);
+	else if (c == '"' && !(*in_s))
+		*in_d = !(*in_d);
+}
+
+size_t	word_end(const char *v, size_t start, int *d, int *s)
+{
+	size_t	j;
+
+	j = start;
+	while (v[j])
+	{
+		toggle_quote(v[j], s, d);
+		if (is_white_space(v[j]) && !(*d) && !(*s))
+			break ;
+		j++;
+	}
+	return (j);
 }
