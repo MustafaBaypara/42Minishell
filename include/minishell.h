@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/21 16:21:30 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:38:13 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ size_t			token_len(t_list *list);
 size_t			word_end(const char *v, size_t start, int *d, int *s);
 void			toggle_quote(char c, int *in_s, int *in_d);
 int				rdr_position(t_command *cmds);
+
+// HEREDOC
+int				heredocs(t_global *g, t_command *cmd);
 
 #endif

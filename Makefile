@@ -8,7 +8,8 @@ LIB = srcs/libft
 
 CFILES = srcs/minishell.c srcs/tools/garbagecollector.c srcs/loop.c \
         srcs/utils/utils.c srcs/utils/utils2.c srcs/exec.c srcs/lexer/lexer.c \
-		srcs/parser/parser.c srcs/parser/parser_utils.c srcs/parser/parser_utils2.c 
+		srcs/parser/parser.c srcs/parser/parser_utils.c srcs/parser/parser_utils2.c \
+		srcs/utils/heredoc.c
 
 OBJECTS = $(CFILES:.c=.o)
 
