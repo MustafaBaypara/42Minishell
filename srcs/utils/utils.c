@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:57:46 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/08/25 18:35:04 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:03:49 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,25 @@ t_list	*env_dup(char **env, t_global *g)
 		i++;
 	}
 	return (list);
+}
+
+t_env	*env_finder(char *str)
+{
+	t_global	*g;
+	t_list		*lst;
+	t_env		*env;
+
+	g = _global(NULL);
+	lst = g->env;
+	env = (t_env *)lst->content;
+
+	while (lst)
+	{
+		if (!ft_strncmp(env->key, str, ft_strlen(str)) && \
+		!ft_strncmp(env->key, str, ft_strlen(env->key)))
+			return (env);
+		lst = lst->next;
+		env = (t_env *)lst->content;
+	}
+	return (NULL);
 }

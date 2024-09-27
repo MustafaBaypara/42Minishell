@@ -6,11 +6,12 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/21 18:04:29 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:10:54 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "libft/libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 

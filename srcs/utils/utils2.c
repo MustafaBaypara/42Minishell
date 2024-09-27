@@ -6,12 +6,11 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:35:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 14:47:38 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:04:51 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <sys/_types/_size_t.h>
 
 char	**ft_split_first(const char *s, char c)
 {
@@ -90,4 +89,23 @@ char	*quote_clean(char *str, int s, int d)
 	}
 	res[j] = '\0';
 	return (free(str), res);
+}
+
+int	check_hdoc(t_command *cmd)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (cmd)
+	{
+		i = 0;
+		while (cmd->rds && cmd->rds[i])
+			if (!ft_strncmp(cmd->rds[i++], "<<", 2))
+				j++;
+		cmd = cmd->next;
+	}
+	if (j == 0)
+		return (0);
+	return (1);
 }
