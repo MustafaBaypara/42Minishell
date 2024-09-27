@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/25 17:38:13 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:43:46 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void			*check_malloc(void *ptr);
 char			**ft_split_first(const char *s, char c);
 t_token_types	identifier(char *token);
 int				is_white_space(char c);
+char			*quote_clean(char *str, int s, int d);
+
 // LEXER
 void			lexer(t_global *g);
 
@@ -40,5 +42,6 @@ int				rdr_position(t_command *cmds);
 
 // HEREDOC
 int				heredocs(t_global *g, t_command *cmd);
+
 
 #endif

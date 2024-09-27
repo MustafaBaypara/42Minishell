@@ -6,11 +6,12 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:35:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/13 15:21:48 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:47:38 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <sys/_types/_size_t.h>
 
 char	**ft_split_first(const char *s, char c)
 {
@@ -66,4 +67,27 @@ int	is_white_space(char c)
 	if (c == 32 || (9 <= c && c <= 13))
 		return (1);
 	return (0);
+}
+
+char	*quote_clean(char *str, int s, int d)
+{
+	char	*res;
+	size_t	i;
+	size_t	j;
+
+	res = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	j = 0;
+	i = 0;
+	while (str[i])
+	{
+		toggle_quote(str[i], &s, &d);
+		if ((str[i] == '\'' && !d) || (str[i] == '"' && !s))
+		{
+			i++;
+			continue ;
+		}
+		res[j++] = str[i++];
+	}
+	res[j] = '\0';
+	return (free(str), res);
 }
