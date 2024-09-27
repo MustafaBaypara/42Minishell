@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <sys/_types/_size_t.h>
 #include <unistd.h>
 
 static t_command	*cmd_init(t_list *token)

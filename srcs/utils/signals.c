@@ -12,7 +12,6 @@
 
 #include "../../include/minishell.h"
 #include <signal.h>
-#include <sys/signal.h>
 #include <readline/readline.h>
 #include <unistd.h>
 #include <termios.h>
