@@ -21,7 +21,7 @@ static int	line_reader(t_global *g)
 
 	tmp = readline("minishell> ");
 	if (!tmp)
-		return (error_program("ERROR: Failed readline\n", 1), (0));
+		return (error_program(0, 1), (0));
 	g->command_line = check_malloc(ft_strtrim(tmp, " "));
 	free(tmp);
 	add_history(g->command_line);
