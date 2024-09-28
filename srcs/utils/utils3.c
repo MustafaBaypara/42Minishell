@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:27:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 18:05:31 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:04:59 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static char	*expand_var(char *tmp, char *t_val, size_t *i)
 		return ((*i)++, tmp);
 	while (ft_isalnum(t_val[*i + j] || t_val[*i + j] == '_'))
 		j++;
-	new_tmp = check_malloc(ft_substr(&t_val[*i], 0, j));
+	new_tmp = check_malloc(ft_strdup(&t_val[*i]));
 	e_v = env_finder(new_tmp);
 	if (e_v)
-		tmp = ft_strjoin(tmp, e_v->value);
+		tmp = check_malloc(ft_strjoin(tmp, e_v->value));
 	*i += j;
 	return (tmp);
 }
@@ -55,7 +55,7 @@ char	*dollar_sign(char *tmp, char *t_val, size_t *i, t_global *g)
 	}
 	else if (t_val[*i + 1] == '\0')
 	{
-		tmp = ft_strjoin(tmp, "$");
+		tmp = check_malloc(ft_strjoin(tmp, "$"));
 		(*i)++;
 	}
 	else if (ft_isalnum(t_val[*i + 1]) || t_val[*i + 1] == '_' \
@@ -64,7 +64,7 @@ char	*dollar_sign(char *tmp, char *t_val, size_t *i, t_global *g)
 		tmp = expand_var(tmp, t_val, i);
 	else
 	{
-		tmp = ft_strjoin(tmp, "$");
+		tmp = check_malloc(ft_strjoin(tmp, "$"));
 		(*i)++;
 	}
 	return (tmp);

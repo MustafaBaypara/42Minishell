@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 18:18:43 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:31:41 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	*heredoc_expander(char *s, t_global *g)
 			start = i;
 			while (s[i] && s[i] != '$')
 				i++;
-			tmp = check_malloc(ft_substr(tmp, start, i));
+			tmp = check_malloc(ft_strjoin(tmp, \
+			check_malloc(ft_substr(s, start, i))));
 		}
 	}
 	return (tmp);
@@ -47,13 +48,18 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
 		if (!line || (!ft_strncmp(line, d, ft_strlen(line)) \
 		&& !ft_strncmp(line, d, ft_strlen(d))))
 		{
-			if (line)
-				free(line);
 			close(fd[1]);
 			g->error_no = 0;
-			error_program(ERROR_MALLOC, 12);
+			error_program("", g->error_no);
 		}
 		line = heredoc_expander(line, g);
+		if (!line)
+		{
+			g->error_no = 12;
+			close(fd[1]);
+			error_program(ERROR_MALLOC, g->error_no);
+		}
+		ft_putendl_fd(line, fd[1]);
 	}
 }
 

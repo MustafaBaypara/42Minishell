@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:48:08 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 17:11:05 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:41:30 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void	parser(t_global *g, t_list *token, size_t i, t_command *cmd)
 	}
 	rdr_position(cmd);
 	heredocs(g, g->cmd_list);
+	g->token_list = NULL;
 	return (cmd->next = NULL, (void)0);
 }

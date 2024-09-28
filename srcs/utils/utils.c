@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:57:46 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 17:03:49 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:11:18 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_program(char *str, int err)
 	t_global	*g;
 
 	g = _global(NULL);
-	if (*str)
+	if (str)
 		printf("%s\n", str);
 	clear_garbage(&g->garbage_list);
 	exit(err);
