@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 17:10:54 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:42:07 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	loop(t_global *g)
 			break ;
 		lexer(g);
 		parser(g, g->token_list, 0, NULL);
+		expander(g, g->cmd_list);
+		catch_signal(1);
+		g->control = 1;
 	}
 	clear_history();
 	return ;

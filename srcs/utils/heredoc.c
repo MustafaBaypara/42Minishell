@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/28 18:31:41 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:06:27 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
 		{
 			close(fd[1]);
 			g->error_no = 0;
-			error_program("", g->error_no);
+			error_program(0, g->error_no);
 		}
 		line = heredoc_expander(line, g);
 		if (!line)
@@ -118,7 +118,9 @@ int	heredocs(t_global *g, t_command *cmd)
 
 	if (check_hdoc(cmd) == 0)
 		return (1);
+	// << asd << abc // waiting at flag 5 on multiple heredoc for ctrl c signal to main proccess
 	catch_signal(5);
+	// loop
 	while (cmd)
 	{
 		i = -1;
