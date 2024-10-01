@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 14:51:37 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:52:08 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				rdr_position(t_command *cmds);
 // EXPANDER
 void			expander(t_global *g);
 int				dollar(t_global	*g, char **value);
-int				home(t_global *g, char **value);
+int				home(t_global *g, char **value, size_t i, char *tmp);
 
 // HEREDOC
 int				heredocs(t_global *g, t_command *cmd);
