@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:48:08 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/29 18:42:01 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:52:46 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,14 @@ static int	get_command(t_command **cmd, t_list **t, size_t *i)
 	return (1);
 }
 
-void	parser(t_global *g, t_list *token, size_t i, t_command *cmd)
+void	parser(t_global *g)
 {
+	size_t		i;
+	t_command	*cmd;
+	t_list		*token;
+
+	i = 0;
+	token = g->token_list;
 	cmd = cmd_init(token);
 	g->cmd_list = cmd;
 	while (token)

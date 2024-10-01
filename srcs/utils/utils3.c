@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:27:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/29 18:50:51 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:39:45 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static char	*expand_var(char *tmp, char *t_val, size_t *i)
 
 	j = 0;
 	(*i)++;
-	if (ft_isdigit(t_val[*i]) || t_val[*i +1] == '"' || t_val[*i + 1] == '\'')
+	if (ft_isdigit(t_val[*i]) || t_val[*i +1] == '"' || t_val[*i +1] == '\'')
 		return ((*i)++, tmp);
-	while (ft_isalnum(t_val[*i + j] || t_val[*i + j] == '_'))
+	while ((ft_isalnum(t_val[*i + j]) || t_val[*i + j] == '_'))
 		j++;
 	new_tmp = check_malloc(ft_strdup(&t_val[*i]));
 	e_v = env_finder(new_tmp);

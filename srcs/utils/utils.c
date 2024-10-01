@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:57:46 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/28 18:11:18 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:07:56 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_env	*env_finder(char *str)
 	g = _global(NULL);
 	lst = g->env;
 	env = (t_env *)lst->content;
-
 	while (lst)
 	{
 		if (!ft_strncmp(env->key, str, ft_strlen(str)) && \

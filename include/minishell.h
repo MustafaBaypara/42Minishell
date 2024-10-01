@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/29 18:27:56 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:51:37 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ int				check_hdoc(t_command *cmd);
 void			lexer(t_global *g);
 
 // PARSER
-void			parser(t_global *g, t_list *token, size_t i, t_command *cmd);
+void			parser(t_global *g);
 size_t			token_len(t_list *list);
 size_t			word_end(const char *v, size_t start, int *d, int *s);
 void			toggle_quote(char c, int *in_s, int *in_d);
 int				rdr_position(t_command *cmds);
 
 // EXPANDER
-void			expander(t_global *g, t_command *cmd);
+void			expander(t_global *g);
 int				dollar(t_global	*g, char **value);
+int				home(t_global *g, char **value);
 
 // HEREDOC
 int				heredocs(t_global *g, t_command *cmd);
