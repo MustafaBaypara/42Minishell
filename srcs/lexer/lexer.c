@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/13 15:13:26 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:27:30 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,5 @@ void	lexer(t_global *g)
 		add_list(&g->garbage_list, ft_lstlast(g->token_list));
 	}
 	//ft_lstiter(g->token_list, lstprinter);
+	//last_things(g);
 }

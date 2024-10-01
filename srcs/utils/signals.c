@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:42:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/27 18:20:21 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:54:43 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ctrl_c(int num)
 void	parent_sigint2(int sig)
 {
 	(void)sig;
-
 	ft_putchar_fd(('\n'), 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
