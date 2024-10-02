@@ -49,7 +49,7 @@ static void	fd_config(t_global *g, t_command *cmd, int *i)
 		if (cmd->is_work)
 		{
 			if (cmd->rds)
-				if (rdr_network(g, &cmd))
+				if (!rdr_network(g, &cmd))
 					continue ;
 		}
 		if (cmd)
@@ -117,6 +117,8 @@ void	executor(t_global *g)
 	int			i;
 	int			num;
 
+	i = 0;
+	num = 0;
 	cmd = g->cmd_list;
 	if (g->control == 0)
 		return ;
@@ -126,10 +128,6 @@ void	executor(t_global *g)
 		num = 1;
 	while (cmd)
 	{
-		printf("%s\n", cmd->value[0]);
-		printf("%s\n", cmd->value[1]);
-		printf("%s\n", cmd->value[2]);
-		// ls -l ve ls -la düzgün çalışmıyor
 		if (cmd->is_work)
 			run(g, cmd, i, num);
 		if (cmd->fd[1] != STDOUT_FILENO)
@@ -139,4 +137,7 @@ void	executor(t_global *g)
 		cmd = cmd->next;
 	}
 	wait_func(g, cmd);
+	g->path = NULL;
+	g->command_line = NULL;
+	g->token_list = NULL;
 }

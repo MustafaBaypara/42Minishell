@@ -79,6 +79,5 @@ int	is_command_ok(t_command *cmd, t_global *g)
 	}
 	else if (i == 0 && path_command(cmd, g))
 		return (1);
-	printf("%s\n", cmd->cmdpath);
 	return (0);
 }

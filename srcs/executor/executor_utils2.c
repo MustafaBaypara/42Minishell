@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "sys/wait.h"
 #include "fcntl.h"
 
 int	check_slash(char *val)
