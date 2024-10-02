@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:57:46 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 16:00:49 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:40:37 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	error_program(char *str, int err)
 	exit(err);
 }
 
-t_list	*env_dup(char **env, t_global *g)
+t_list	*env_dup(char **env)
 {
 	t_list	*list;
 	size_t	i;
@@ -45,11 +45,9 @@ t_list	*env_dup(char **env, t_global *g)
 	while (env[i])
 	{
 		_env = check_malloc(ft_calloc(1, sizeof(t_env)));
-		tmp = check_malloc(ft_split_first(env[i], '='));
+		tmp = check_malloc_split(ft_split_first(env[i], '='));
 		_env->key = tmp[0];
 		_env->value = tmp[1];
-		add_list(&g->garbage_list, _env->value);
-		add_list(&g->garbage_list, _env->key);
 		ft_lstadd_back(&list, check_malloc(ft_lstnew(_env)));
 		i++;
 	}
@@ -75,4 +73,18 @@ t_env	*env_finder(char *str)
 			env = (t_env *)lst->content;
 	}
 	return (NULL);
+}
+
+char	**check_malloc_split(char **split_result)
+{
+	int		i;
+
+	check_malloc(split_result);
+	i = 0;
+	while (split_result[i])
+	{
+		check_malloc(split_result[i]);
+		i++;
+	}
+	return (split_result);
 }

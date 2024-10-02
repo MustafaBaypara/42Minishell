@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:48:08 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 14:52:46 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:49:33 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	parser(t_global *g)
 	t_command	*cmd;
 	t_list		*token;
 
+	if (g->control == 0)
+		return ;
 	i = 0;
 	token = g->token_list;
 	cmd = cmd_init(token);
@@ -95,7 +97,7 @@ void	parser(t_global *g)
 		token = token->next;
 	}
 	rdr_position(cmd);
-	heredocs(g, g->cmd_list);
-	g->token_list = NULL;
+	if (!heredocs(g, g->cmd_list))
+		return (g->control = 0, error_program(0, g->error_no));
 	return (cmd->next = NULL, (void)0);
 }

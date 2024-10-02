@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:37:27 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/21 16:37:50 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:08:07 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_global
 
 	char		*tmp;
 	char		*command_line;
+	char		**path;
+	char		**the_env;
 
 	t_list		*token_list;
 	t_list		*garbage_list;

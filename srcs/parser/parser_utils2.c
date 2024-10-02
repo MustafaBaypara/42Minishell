@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:04:19 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/09/28 18:39:37 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:07:35 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	fill_rds(t_command *cmd, char **tmp, size_t *f)
 			cmd->rds[j++] = val[i];
 		}
 		else
-			tmp[(*f)++] = val[i++];
+			tmp[(*f)++] = val[i];
+		i++;
 	}
 	tmp[*f] = NULL;
 }

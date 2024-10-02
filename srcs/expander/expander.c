@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 18:16:28 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:04:51 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	expander(t_global *g)
 {
 	t_command	*cmd;
 
+	if (g->control == 0)
+		return ;
 	cmd = g->cmd_list;
 	while (cmd)
 	{
@@ -115,13 +117,10 @@ void	expander(t_global *g)
 			return (g->error_no = 12, error_program(0, 12));
 		if (rdr(g, cmd))
 			return (g->error_no = 12, error_program(0, 12));
+		cmd = cmd->next;
 		printf("%s\n", cmd->value[0]);
 		printf("%s\n", cmd->value[1]);
 		printf("%s\n", cmd->value[2]);
-		printf("%s\n", cmd->value[3]);
-		printf("%s\n", cmd->rds[0]);
-		printf("%s\n", cmd->rds[1]);
-		printf("%s\n", cmd->rds[2]);
-		cmd = cmd->next;
 	}
+	exit(1);
 }
