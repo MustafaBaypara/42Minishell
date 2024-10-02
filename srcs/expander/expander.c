@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/02 18:04:51 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:08:20 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,5 @@ void	expander(t_global *g)
 		if (rdr(g, cmd))
 			return (g->error_no = 12, error_program(0, 12));
 		cmd = cmd->next;
-		printf("%s\n", cmd->value[0]);
-		printf("%s\n", cmd->value[1]);
-		printf("%s\n", cmd->value[2]);
 	}
-	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/02 18:04:14 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:15:28 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	executor(t_global *g)
 		printf("%s\n", cmd->value[0]);
 		printf("%s\n", cmd->value[1]);
 		printf("%s\n", cmd->value[2]);
+		// ls -l ve ls -la düzgün çalışmıyor
 		if (cmd->is_work)
 			run(g, cmd, i, num);
 		if (cmd->fd[1] != STDOUT_FILENO)

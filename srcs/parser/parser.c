@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:48:08 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/02 14:49:33 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:14:32 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_command	*cmd_init(t_list *token)
 	cmd->pid = -1;
 	cmd->the_fd = -1;
 	cmd->rds = NULL;
+	cmd->next = NULL;
 	cmd->is_work = 1;
 	return (cmd);
 }
@@ -42,6 +43,8 @@ static int	get_token(t_command **cmd, t_list **t, size_t *i)
 		return (0);
 	*i = 0;
 	(*cmd)->next = cmd_init(*t);
+	if (!(*cmd)->next)
+		return (0);
 	(*cmd)->p_type = 2;
 	*cmd = (*cmd)->next;
 	(*cmd)->p_type = 1;
