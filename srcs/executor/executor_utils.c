@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:13 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 14:52:31 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/03 17:19:55 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int	path_command(t_command *cmd, t_global *g)
 			return (cmd->cmdpath = NULL, 0);
 		if (access(cmd->cmdpath, X_OK) == 0)
 			return (1);
+		remove_from_list(&g->garbage_list, cmd->cmdpath);
 		cmd->cmdpath = NULL;
 		i++;
 	}
