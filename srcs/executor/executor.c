@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/02 18:15:28 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:18:47 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int	rdr_network(t_global *g, t_command **cmd)
 	{
 		if (files(*cmd, &i, -1) == -1)
 		{
-
 			(*cmd)->is_work = 0;
 			g->error_no = 1;
 			*cmd = (*cmd)->next;
@@ -137,7 +136,5 @@ void	executor(t_global *g)
 		cmd = cmd->next;
 	}
 	wait_func(g, cmd);
-	g->path = NULL;
-	g->command_line = NULL;
-	g->token_list = NULL;
+	prepare_next(g);
 }

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 17:27:30 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:26:33 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	lexer_definer(t_global *g, size_t i_len, size_t *j)
 void	lstprinter(void *content)
 {
 	printf("%s\n", (char *)content);
+	printf("----\n");
 }
 
 void	lexer(t_global *g)

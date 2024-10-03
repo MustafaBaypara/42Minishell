@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:50:28 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/08/25 18:35:50 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:35:49 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,46 @@ void	clear_garbage(t_list **lst)
 		*lst = tmp;
 	}
 	return ;
+}
+
+void	remove_from_list(t_list **list, void *dirty)
+{
+	t_list	*prev;
+	t_list	*current;
+
+	prev = NULL;
+	current = *list;
+	if (current->content == dirty)
+	{
+		*list = current->next;
+		current->next = NULL;
+		clear_garbage(&current);
+		return ;
+	}
+	while (current && current->content != dirty)
+	{
+		prev = current;
+		current = current->next;
+	}
+	if (current && current->content == dirty)
+	{
+		prev->next = current->next;
+		current->next = NULL;
+		clear_garbage(&current);
+	}
+}
+
+void	clean_list(t_list **list)
+{
+	t_global	*g;
+	t_list		*current;
+
+	g = _global(NULL);
+	current = NULL;
+	current = *list;
+	while (current)
+	{
+		remove_from_list(&g->garbage_list, current->content);
+		current = current->next;
+	}
 }
