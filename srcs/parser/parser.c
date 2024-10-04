@@ -6,12 +6,24 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:48:08 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 17:22:35 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:01:05 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <unistd.h>
+
+static void	init_value(t_command *cmd)
+{
+	cmd->p_type = 0;
+	cmd->fd[0] = STDIN_FILENO;
+	cmd->fd[1] = STDOUT_FILENO;
+	cmd->pid = -1;
+	cmd->the_fd = -1;
+	cmd->rds = NULL;
+	cmd->next = NULL;
+	cmd->is_work = 1;
+}
 
 static t_command	*cmd_init(t_list *token)
 {
@@ -26,14 +38,7 @@ static t_command	*cmd_init(t_list *token)
 	i = token_len(token);
 	cmd->value = (char **)check_malloc(ft_calloc((i + 1), sizeof(char *)));
 	cmd->value[i] = NULL;
-	cmd->p_type = 0;
-	cmd->fd[0] = STDIN_FILENO;
-	cmd->fd[1] = STDOUT_FILENO;
-	cmd->pid = -1;
-	cmd->the_fd = -1;
-	cmd->rds = NULL;
-	cmd->next = NULL;
-	cmd->is_work = 1;
+	init_value(cmd);
 	return (cmd);
 }
 

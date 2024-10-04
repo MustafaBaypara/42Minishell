@@ -1,9 +1,12 @@
 {
     "files.associations": {
+        "*.c": "c",
         "*.py": "python",
         "*.cs": "csharp",
         "libft.h": "c",
         "stdlib.h": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "__locale": "c",
+        "unistd.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 16:28:46 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:01:48 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,6 @@ static void	lexer_definer(t_global *g, size_t i_len, size_t *j)
 	}
 }
 
-void	lstprinter(void *content)
-{
-	printf("%s\n", (char *)content);
-	printf("----\n");
-}
-
 void	lexer(t_global *g)
 {
 	size_t	i_len;
@@ -88,6 +82,4 @@ void	lexer(t_global *g)
 		add_list(&g->token_list, check_malloc(ft_strdup(g->tmp)));
 		add_list(&g->garbage_list, ft_lstlast(g->token_list));
 	}
-	//ft_lstiter(g->token_list, lstprinter);
-	//last_things(g);
 }

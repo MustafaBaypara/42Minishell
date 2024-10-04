@@ -6,12 +6,47 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 16:26:57 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:25:05 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include <stdio.h>
+
+static char	*ft_strjoin_triple(char *one, char *two, char *three)
+{
+	char	*res;
+	char	*tmp;
+
+	tmp = ft_strjoin(one, two);
+	if (!tmp)
+		error_program(ERROR_MALLOC, 12);
+	res = ft_strjoin(tmp, three);
+	if (!res)
+		error_program(ERROR_MALLOC, 12);
+	free(tmp);
+	return (res);
+}
+
+char	**list_to_char(t_list	*list)
+{
+	char	**res;
+	t_list	*tmp;
+	size_t	i;
+
+	i = 0;
+	tmp = list;
+	res = check_malloc(ft_calloc(ft_lstsize(list) + 1, sizeof(char *)));
+	while (tmp)
+	{
+		res[i] = check_malloc(ft_strjoin_triple((((t_env *)tmp->content)->key),
+					"=", (((t_env *)tmp->content)->value)));
+		tmp = tmp->next;
+		i++;
+	}
+	res[i] = NULL;
+	return (res);
+}
 
 t_global	*_global(t_global *g)
 {
@@ -42,7 +77,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1 || av[1])
 		error_program(ERROR_ARG, 1);
 	global.env = env_dup(env);
-	global.the_env = env;
+	global.the_env = list_to_char(global.env);
 	if (!global.env)
 		return (0);
 	loop(&global);

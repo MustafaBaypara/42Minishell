@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:09:07 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 17:57:43 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:48:36 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	home(t_global *g, char **value, size_t i, char *tmp)
 
 	tmp = check_malloc(ft_strdup(""));
 	str = *value;
-	printf("here\n");
 	while (str[i])
 	{
 		if (str[i] == '~' && !g->single_quotes && ! g->double_quotes)
@@ -52,7 +51,6 @@ int	dollar(t_global	*g, char **value)
 	i = 0;
 	tmp = check_malloc(ft_strdup(""));
 	str = *value;
-	printf("here\n");
 	while (str[i])
 	{
 		if (str[i] == '$' && !g->single_quotes)

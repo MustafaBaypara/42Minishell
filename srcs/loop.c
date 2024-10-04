@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 18:10:18 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:59:27 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,6 @@ void	loop(t_global *g)
 		executor(g);
 		catch_signal(1);
 		g->control = 1;
-		
-		int x = 0;
-		t_list *tmp = g->garbage_list;
-		while (tmp)
-		{
-			x++;
-			tmp = tmp->next;
-		}
-		printf("%d\n", x);
-		
 	}
 	clear_history();
 	return ;
