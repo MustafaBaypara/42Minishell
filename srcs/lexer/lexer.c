@@ -6,11 +6,23 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/04 14:01:48 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:34:50 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+size_t	check_space(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (i != 0 && str[i] == '\0')
+		return (0);
+	return (1);
+}
 
 static void	listing(t_global *g, size_t *j, size_t *i)
 {
@@ -81,5 +93,14 @@ void	lexer(t_global *g)
 		g->tmp[j] = '\0';
 		add_list(&g->token_list, check_malloc(ft_strdup(g->tmp)));
 		add_list(&g->garbage_list, ft_lstlast(g->token_list));
+	}
+	if (!check_syntax(g))
+	{
+		g->control = 0;
+		g->error_no = 258;
+		clean_list(&g->token_list);
+		remove_from_list(&g->garbage_list, g->command_line);
+		g->command_line = NULL;
+		g->token_list = NULL;
 	}
 }

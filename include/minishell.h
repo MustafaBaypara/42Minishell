@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/04 13:56:20 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:13:43 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int				check_hdoc(t_command *cmd);
 
 // LEXER
 void			lexer(t_global *g);
+int				check_syntax(t_global *g);
+size_t			check_space(char *str);
 
 // PARSER
 void			parser(t_global *g);

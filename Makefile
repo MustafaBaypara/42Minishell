@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 LIB = srcs/libft
 
-CFILES = srcs/minishell.c srcs/tools/garbagecollector.c srcs/loop.c \
+CFILES = srcs/minishell.c srcs/tools/garbagecollector.c srcs/loop.c srcs/lexer/syntax.c \
         srcs/utils/utils.c srcs/utils/utils2.c srcs/exec.c srcs/lexer/lexer.c \
 		srcs/parser/parser.c srcs/parser/parser_utils.c srcs/parser/parser_utils2.c \
 		srcs/utils/heredoc.c srcs/utils/utils3.c srcs/utils/signals.c srcs/expander/expander.c \

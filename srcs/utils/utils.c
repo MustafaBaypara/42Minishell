@@ -6,11 +6,12 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:57:46 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/04 13:33:19 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/05 15:15:32 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <readline/readline.h>
 
 void	*check_malloc(void *ptr)
 {
@@ -29,6 +30,7 @@ void	error_program(char *str, int err)
 	g = _global(NULL);
 	if (str)
 		printf("%s\n", str);
+	rl_clear_history();
 	clear_garbage(&g->garbage_list);
 	exit(err);
 }

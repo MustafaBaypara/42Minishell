@@ -7,6 +7,7 @@
         "stdlib.h": "c",
         "minishell.h": "c",
         "__locale": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "history.h": "c"
     }
 }

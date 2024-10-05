@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:52:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/04 13:56:15 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/05 14:26:37 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ void	prepare_next(t_global *g)
 		cmd = tmp;
 	}
 	g->cmd_list = NULL;
+	g->single_quotes = 0;
+	g->double_quotes = 0;
 }

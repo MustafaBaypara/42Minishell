@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/04 15:25:05 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/05 13:45:57 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	init_global(t_global *g)
 	g->cmd_list = NULL;
 	g->path = NULL;
 	g->control = 1;
+	g->error_no = 0;
+	catch_signal(1);
 }
 
 int	main(int ac, char **av, char **env)
@@ -78,8 +80,7 @@ int	main(int ac, char **av, char **env)
 		error_program(ERROR_ARG, 1);
 	global.env = env_dup(env);
 	global.the_env = list_to_char(global.env);
-	if (!global.env)
-		return (0);
 	loop(&global);
 	clear_garbage(&global.garbage_list);
+	return (global.error_no);
 }
