@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/05 18:35:15 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:46:51 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,15 @@
 
 static int	line_reader(t_global *g)
 {
-	char	*tmp;
-
-	tmp = readline("minishell> ");
-	if (!tmp)
-		return (error_program(0, 1), (0));
-	g->command_line = check_malloc(ft_strtrim(tmp, " "));
-	free(tmp);
-	add_history(g->command_line);
-	if (!check_space(g->command_line))
-		return (0);
-	if (ft_strncmp(g->command_line, "exit", 5) == 0)
-		return (-1);
+	g->command_line = readline("minishell> ");
+	if (!g->command_line)
+		return (rl_clear_history(), error_program(0, 1), (-1));
+	else if (!g->command_line[0])
+		return (free(g->command_line), 0);
+	else if (!check_space(g->command_line))
+		return (free(g->command_line), 0);
+	else
+		add_history(g->command_line);
 	return (1);
 }
 
@@ -49,17 +46,5 @@ void	loop(t_global *g)
 		executor(g);
 		catch_signal(1);
 		g->control = 1;
-
-		int x = 0;
-		t_list *tmp = g->garbage_list;
-		while (tmp)
-		{
-			x++;
-			tmp = tmp->next;
-		}
-		//printf("%d\n", x);
-		
 	}
-	rl_clear_history();
-	return ;
 }

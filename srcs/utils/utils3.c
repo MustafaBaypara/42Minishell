@@ -6,13 +6,12 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:27:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 14:39:45 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:39:51 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// ? son hata kodunu verir
 static char	*expand_dsign(char *tmp)
 {
 	t_global	*g;
@@ -24,7 +23,6 @@ static char	*expand_dsign(char *tmp)
 	return (tmp);
 }
 
-// envde değişkeni bulur
 static char	*expand_var(char *tmp, char *t_val, size_t *i)
 {
 	size_t	j;
@@ -45,7 +43,6 @@ static char	*expand_var(char *tmp, char *t_val, size_t *i)
 	return (tmp);
 }
 
-// dolar işaretini ele alır
 char	*dollar_sign(char *tmp, char *t_val, size_t *i, t_global *g)
 {
 	if (t_val[*i + 1] == '?')
