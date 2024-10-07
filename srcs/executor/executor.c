@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 17:00:38 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:53:17 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	fd_config(t_global *g, t_command *cmd, int *i)
 
 static void	execute_it(t_command *cmd, t_global *g, int i, int num)
 {
+	printf("HERE\n");
 	if (!num)
 		cmd->pid = fork();
 	if (cmd->pid == -1)
