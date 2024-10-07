@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 15:16:23 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:58:17 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			prepare_next(t_global *g);
 void			close_fds(t_command *cmd, int i);
 
 // BUILTIN
-int				builtin_check(t_command *cmd);
+int				builtin_check(t_command *cmd, int num);
+int				echo(t_command *c, t_global *g);
 
 #endif

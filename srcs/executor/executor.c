@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 15:16:41 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:00:38 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	run(t_global *g, t_command *cmd, int i, int num)
 			return (catch_signal(3));
 		catch_signal(2);
 	}
-	if (!builtin_check(cmd))
+	if (!builtin_check(cmd, num))
 		;
 	else if (is_command_ok(cmd, g))
 		execute_it(cmd, g, i, num);
