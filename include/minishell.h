@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/05 18:13:43 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:16:23 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int				check_slash(char *val);
 void			catch_error(t_command *cmd, int i, t_global *g);
 int				is_command_ok(t_command *cmd, t_global *g);
 void			prepare_next(t_global *g);
+void			close_fds(t_command *cmd, int i);
 
 // BUILTIN
 int				builtin_check(t_command *cmd);

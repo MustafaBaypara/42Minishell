@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/06 18:21:58 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:16:41 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	execute_it(t_command *cmd, t_global *g, int i, int num)
 		dup2(cmd->fd[0], STDIN_FILENO);
 		if (cmd->fd[0] != STDIN_FILENO)
 			close(cmd->fd[0]);
-		(void)i;
+		close_fds(cmd->next, i);
 		execve(cmd->cmdpath, cmd->value, g->the_env);
-		perror("EXECVE");
+		perror("Execve");
 		g->error_no = 1;
 		error_program("Error: Execute", g->error_no);
 	}

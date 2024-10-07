@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:13 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/03 17:19:55 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:17:03 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,32 @@ int	is_command_ok(t_command *cmd, t_global *g)
 	else if (i == 0 && path_command(cmd, g))
 		return (1);
 	return (0);
+}
+
+void	close_fds(t_command *cmd, int i)
+{
+	int	j;
+
+	j = 0;
+	if (i == -1)
+	{
+		while (cmd)
+		{
+			if (cmd->fd[1] != STDOUT_FILENO)
+				close(cmd->fd[1]);
+			if (cmd->fd[0] != STDIN_FILENO)
+				close(cmd->fd[0]);
+			cmd = cmd->next;
+		}
+		return ;
+	}
+	while (cmd && i > j)
+	{
+		if (cmd->fd[1] != STDOUT_FILENO)
+			close (cmd->fd[1]);
+		if (cmd->fd[0] != STDIN_FILENO)
+			close(cmd->fd[0]);
+		j++;
+		cmd = cmd->next;
+	}
 }
