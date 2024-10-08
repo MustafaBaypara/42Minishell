@@ -34,11 +34,15 @@ static int	execute_builtin(t_command *cmd, int num,
 		return (error_program(0, 12), 1);
 	if (num)
 		error_program(0, g->error_no);
+	else
+		error_program(0, g->error_no);
 	return (0);
 }
 
 int	builtin_check(t_command *cmd, int num)
 {
+	if (!cmd->value[0])
+		return (1);
 	if (!ft_strncmp(cmd->value[0], "echo", ft_strlen("echo")))
 		return (execute_builtin(cmd, num, echo));
 	else if (!ft_strncmp(cmd->value[0], "cd", ft_strlen("cd")))

@@ -60,6 +60,7 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
 			error_program(ERROR_MALLOC, g->error_no);
 		}
 		ft_putendl_fd(line, fd[1]);
+		rl_clear_history();
 	}
 }
 
