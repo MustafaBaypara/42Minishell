@@ -99,8 +99,8 @@ void	run(t_global *g, t_command *cmd, int i, int num)
 			return (catch_signal(3));
 		catch_signal(2);
 	}
-	if (!builtin_check(cmd, num))
-		;
+	if (builtin_check(cmd, num) == 0)
+		return ;
 	else if (is_command_ok(cmd, g))
 		execute_it(cmd, g, i, num);
 	else

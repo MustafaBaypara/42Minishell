@@ -34,8 +34,6 @@ static int	execute_builtin(t_command *cmd, int num,
 		return (error_program(0, 12), 1);
 	if (num)
 		error_program(0, g->error_no);
-	else
-		error_program(0, g->error_no);
 	return (0);
 }
 
@@ -56,6 +54,6 @@ int	builtin_check(t_command *cmd, int num)
 	else if (!ft_strncmp(cmd->value[0], "export", ft_strlen("export")))
 		return (execute_builtin(cmd, num, echo));
 	else if (!ft_strncmp(cmd->value[0], "exit", ft_strlen("exit")))
-		return (execute_builtin(cmd, num, echo));
+		return (execute_builtin(cmd, num, exit_func));
 	return (1);
 }

@@ -74,5 +74,6 @@ int				builtin_check(t_command *cmd, int num);
 int				echo(t_command *c, t_global *g);
 int				check_flag(t_command *c);
 int				env(t_command *c, t_global *g);
+int             exit_func(t_command *cmd, t_global *g);
 
 #endif

@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 #include <stdio.h>
+#include <readline/readline.h>
 
 static char	*ft_strjoin_triple(char *one, char *two, char *three)
 {
@@ -81,6 +82,7 @@ int	main(int ac, char **av, char **env)
 	global.env = env_dup(env);
 	global.the_env = list_to_char(global.env);
 	loop(&global);
+	rl_clear_history();
 	clear_garbage(&global.garbage_list);
 	return (global.error_no);
 }
