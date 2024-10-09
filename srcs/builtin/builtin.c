@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:57:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 17:52:10 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:27:42 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	builtin_check(t_command *cmd, int num)
 	if (!ft_strncmp(cmd->value[0], "echo", ft_strlen("echo")))
 		return (execute_builtin(cmd, num, echo));
 	else if (!ft_strncmp(cmd->value[0], "cd", ft_strlen("cd")))
-		return (execute_builtin(cmd, num, echo));
+		return (execute_builtin(cmd, num, cd));
 	else if (!ft_strncmp(cmd->value[0], "pwd", ft_strlen("pwd")))
 		return (execute_builtin(cmd, num, echo));
 	else if (!ft_strncmp(cmd->value[0], "env", ft_strlen("env")))

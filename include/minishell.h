@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 17:48:17 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:29:24 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int				echo(t_command *c, t_global *g);
 int				check_flag(t_command *c);
 int				env(t_command *c, t_global *g);
 int             exit_func(t_command *cmd, t_global *g);
+int             cd(t_command *cmd, t_global *g);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 14:12:15 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:26:47 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	line_reader(t_global *g)
 		add_history(g->command_line);
 	return (1);
 }
+
 
 void	loop(t_global *g)
 {
