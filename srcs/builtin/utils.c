@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:43:59 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:49 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:56:53 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ static t_list	*add_env(t_list **g_env, char *key, char *value)
 	return (env);
 }
 
+static int	set_env(t_list *env, char *val)
+{
+	t_env	*ctx;
+
+	ctx = (t_env *)env->content;
+	if (val)
+		ctx->value = check_malloc(ft_strdup(val));
+	else
+		ctx->value = check_malloc(ft_strdup(""));
+	return (0);
+}
+
 t_list	*sync_env(t_list **g_env, char *key, char *value)
 {
 	t_list	*env;
@@ -38,9 +50,8 @@ t_list	*sync_env(t_list **g_env, char *key, char *value)
 		return (NULL);
 	env = env_finder(key);
 	if (!env)
-	{
 		env = add_env(g_env, key, value);
-		if (!env)
-			return (NULL);
-	}
+	else
+		et_env(env, value);
+	return (env);
 }
