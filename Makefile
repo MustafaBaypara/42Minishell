@@ -13,6 +13,7 @@ CFILES = srcs/minishell.c srcs/tools/garbagecollector.c srcs/loop.c \
 		srcs/expander/expander_utils.c srcs/executor/executor.c srcs/executor/executor_utils.c \
 		srcs/builtin/builtin.c srcs/executor/executor_utils2.c srcs/executor/executor_utils3.c \
 		srcs/builtin/echo.c srcs/builtin/env.c srcs/builtin/exit.c srcs/builtin/cd.c srcs/builtin/utils.c \
+		srcs/builtin/pwd.c
 
 
 OBJECTS = $(CFILES:.c=.o)

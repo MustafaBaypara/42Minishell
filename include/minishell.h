@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/09 17:57:31 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:41:34 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char			*quote_clean(char *str, int s, int d);
 t_env			*env_finder(char *str);
 char			*dollar_sign(char *tmp, char *t_val, size_t *i, t_global *g);
 int				check_hdoc(t_command *cmd);
+char            **list_to_char(t_list	*list);
 
 // LEXER
 void			lexer(t_global *g);
@@ -76,6 +77,8 @@ int				check_flag(t_command *c);
 int				env(t_command *c, t_global *g);
 int             exit_func(t_command *cmd, t_global *g);
 int             cd(t_command *cmd, t_global *g);
-t_list          *sync_env(t_list **g_env, char *key, char *value);
+t_env          *sync_env(t_list **g_env, char *key, char *value);
+void            cd_sync(t_global *g, char *path, char *oldpwd, char *wd);
+int	            pwd(t_command *cmd, t_global *g);
 
 #endif
