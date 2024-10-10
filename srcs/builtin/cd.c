@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:27:16 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 16:32:52 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:01:49 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*get_path(t_command *cmd, t_env *oldpwd, t_env *home)
 		return (home_path(home));
 }
 
-int cd(t_command *cmd, t_global *g)
+int	cd(t_command *cmd, t_global *g)
 {
 	t_env	*env_pwd;
 	char	*path;

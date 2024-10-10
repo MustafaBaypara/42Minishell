@@ -6,20 +6,19 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:43:59 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 16:34:54 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:43:24 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static t_env	*add_env(t_list **g_env, char *key, char *value)
+t_env	*add_env(t_list **g_env, char *key, char *value)
 {
 	t_list	*env;
 	t_env	*content;
 
 	content = check_malloc(ft_calloc(1, sizeof(t_env)));
 	env = check_malloc(ft_calloc(1, sizeof(t_list)));
-	
 	content->key = check_malloc(ft_strdup(key));
 	if (value)
 		content->value = check_malloc(ft_strdup(value));
@@ -31,7 +30,7 @@ static t_env	*add_env(t_list **g_env, char *key, char *value)
 	return (content);
 }
 
-static int	set_env(t_env *env, char *val)
+int	set_env(t_env *env, char *val)
 {
 	if (val)
 		env->value = check_malloc(ft_strdup(val));
@@ -47,7 +46,8 @@ void	cd_sync(t_global *g, char *path, char *oldpwd, char *wd)
 		wd = check_malloc(getcwd(NULL, 0));
 		if (!wd)
 			error_program("error: getcwd", 1);
-		if (!sync_env(&g->env, "OLDPWD", oldpwd) || !sync_env(&g->env, "PWD", wd))
+		if (!sync_env(&g->env, "OLDPWD", oldpwd)
+			|| !sync_env(&g->env, "PWD", wd))
 			error_program(ERROR_MALLOC, 12);
 		g->error_no = 0;
 	}
@@ -58,6 +58,7 @@ void	cd_sync(t_global *g, char *path, char *oldpwd, char *wd)
 t_env	*sync_env(t_list **g_env, char *key, char *value)
 {
 	t_env	*env;
+
 	if (!value)
 		return (NULL);
 	env = env_finder(key);
@@ -66,4 +67,15 @@ t_env	*sync_env(t_list **g_env, char *key, char *value)
 	else
 		set_env(env, value);
 	return (env);
+}
+
+int	check_alnum(char *str, int i)
+{
+	int	j;
+
+	j = -1;
+	while (str[++j] && j < i)
+		if (!ft_isalnum(str[j]) && str[j] != '_')
+			return (0);
+	return (1);
 }

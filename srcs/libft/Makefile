@@ -6,7 +6,7 @@
 #    By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/06 14:57:54 by mbaypara          #+#    #+#              #
-#    Updated: 2024/09/27 18:21:03 by mbaypara         ###   ########.fr        #
+#    Updated: 2024/10/10 17:14:08 by mbaypara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,4 +53,4 @@ re:				fclean $(NAME)
 bonus:		 	$(OBJS) $(BONUS_OBJS)
 				@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
-.PHONY:			all clean fclean re bonus 
+.PHONY:			all clean fclean re bonus
