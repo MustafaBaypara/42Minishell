@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 19:43:44 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/11 17:59:29 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,9 @@ int				pwd(t_command *cmd, t_global *g);
 int				check_alnum(char *str, int i);
 int				set_env(t_env *env, char *val);
 t_env			*add_env(t_list **g_env, char *key, char *value);
+t_list			*msh_lstcpy(t_list *lst);
+int				export(t_command *cmd, t_global *g);
+void			msh_lstsort(t_list **lst);
+int				unset(t_command *cmd, t_global *g);
 
 #endif

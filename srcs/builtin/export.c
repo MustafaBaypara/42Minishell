@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:58:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 20:30:56 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/11 17:28:28 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static int	valid_identifier(t_command *cmd, t_global *g, int i)
 	return (0);
 }
 
-static int	export_sync_env(t_command *cmd, t_global *g, char *key, int i)
+static t_env	*export_sync_env(t_command *cmd, t_global *g, char *key, int i)
 {
 	char	*str;
 	char	*value;
-	int		res;
+	t_env	*res;
 
 	str = check_malloc(ft_substr(cmd->value[i], 0, key - cmd->value[i]));
 	value = check_malloc(ft_strdup(key + 1));
-	res = sync_env(&g->env, key, value);
+	res = sync_env(&g->env, str, value);
 	return (res);
 }
 
@@ -58,16 +58,34 @@ static int	export_command(t_command *cmd, t_global *g)
 	return (g->error_no = 0, 0);
 }
 
-static void	export_declare(t_env *env, int fd)
+static void	export_declare(t_list *list, int fd)
 {
-	if (!env)
+	t_env	*env;
+	t_list	*print;
+
+	if (!list)
 		return ;
-	while ()
+	print = list;
+	while (print)
+	{
+		env = (t_env *)print->content;
+		ft_putstr_fd("declare -x ", fd);
+		ft_putstr_fd(env->key, fd);
+		if (env->value)
+		{
+			ft_putstr_fd("=\"", fd);
+			ft_putstr_fd(env->value, fd);
+			ft_putstr_fd("\"\n", fd);
+		}
+		else
+			ft_putstr_fd("\n", fd);
+		print = print->next;
+	}
 }
 
-int export(t_command *cmd, t_global *g)
+int	export(t_command *cmd, t_global *g)
 {
-	t_env	*export;
+	t_list	*export;
 
 	export = NULL;
 	if (!check_flag(cmd))
@@ -75,7 +93,10 @@ int export(t_command *cmd, t_global *g)
 	if (export_command(cmd, g))
 		return (0);
 	g->the_env = list_to_char(g->env);
+	export = msh_lstcpy(g->env);
+	msh_lstsort(&export);
 	if (!cmd->value[1])
 		export_declare(export, cmd->fd[1]);
+	g->the_env = list_to_char(g->env);
 	return (1);
 }
