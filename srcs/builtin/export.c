@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:58:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/11 17:28:28 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:19:08 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,5 @@ int	export(t_command *cmd, t_global *g)
 	msh_lstsort(&export);
 	if (!cmd->value[1])
 		export_declare(export, cmd->fd[1]);
-	g->the_env = list_to_char(g->env);
 	return (1);
 }
