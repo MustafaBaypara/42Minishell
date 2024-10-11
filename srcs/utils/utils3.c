@@ -36,6 +36,7 @@ static char	*expand_var(char *tmp, char *t_val, size_t *i)
 	while ((ft_isalnum(t_val[*i + j]) || t_val[*i + j] == '_'))
 		j++;
 	new_tmp = check_malloc(ft_strdup(&t_val[*i]));
+	new_tmp = check_malloc(ft_substr(new_tmp, 0, j));
 	e_v = env_finder(new_tmp);
 	if (e_v)
 		tmp = check_malloc(ft_strjoin(tmp, e_v->value));

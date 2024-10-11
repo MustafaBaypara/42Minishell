@@ -41,23 +41,22 @@ static void	remove_quotes_inplace(char **c_val)
 static int	expand(t_global *g, t_command *clst)
 {
 	size_t	i;
-	char	**str;
 
 	i = 0;
 	g->single_quotes = 0;
 	g->double_quotes = 0;
-	str = clst->value;
-	while (str[i])
+	while (clst->value[i])
 	{
-		if (ft_strnstr(str[i], "$", ft_strlen(str[i])))
-			if (!dollar(g, &str[i]))
+		if (ft_strnstr(clst->value[i], "$", ft_strlen(clst->value[i])))
+			if (!dollar(g, &clst->value[i]))
 				return (1);
-		if (ft_strnstr(str[i], "~", ft_strlen(str[i])))
-			if (!home(g, &str[i], 0, NULL))
+		if (ft_strnstr(clst->value[i], "~", ft_strlen(clst->value[i])))
+			if (!home(g, &clst->value[i], 0, NULL))
 				return (1);
 		i++;
 	}
 	remove_quotes_inplace(clst->value);
+	remove_empty_elements(clst->value);
 	return (0);
 }
 

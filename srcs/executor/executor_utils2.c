@@ -46,7 +46,7 @@ void	catch_error(t_command *cmd, int i, t_global *g)
 	}
 	else if (i == 4)
 	{
-		ft_putendl_fd(": is a directory", 2);
+		ft_putendl_fd(": Is a directory", 2);
 		g->error_no = 126;
 	}
 }

@@ -79,7 +79,7 @@ static void	execute_it(t_command *cmd, t_global *g, int i, int num)
 		execve(cmd->cmdpath, cmd->value, g->the_env);
 		perror("Execve");
 		g->error_no = 1;
-		error_program("Error: Execute", g->error_no);
+		error_program(0, g->error_no);
 	}
 	catch_signal(3);
 }

@@ -40,7 +40,7 @@ static int	export_command(t_command *cmd, t_global *g)
 	t_env	*env;
 
 	i = 0;
-	while (cmd->value[++i])
+	while (cmd->value[++i] != NULL)
 	{
 		key = ft_strchr(cmd->value[i], '=');
 		if (!key)

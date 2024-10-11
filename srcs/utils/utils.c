@@ -62,17 +62,17 @@ t_env	*env_finder(char *str)
 	t_list		*lst;
 	t_env		*env;
 
+	if (!str)
+		return (NULL);
 	g = _global(NULL);
 	lst = g->env;
-	env = (t_env *)lst->content;
 	while (lst)
 	{
+		env = (t_env *)lst->content;
 		if (!ft_strncmp(env->key, str, ft_strlen(str)) && \
 		!ft_strncmp(env->key, str, ft_strlen(env->key)))
 			return (env);
 		lst = lst->next;
-		if (lst)
-			env = (t_env *)lst->content;
 	}
 	return (NULL);
 }

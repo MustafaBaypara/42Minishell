@@ -99,5 +99,6 @@ void	msh_lstsort(t_list **lst)
 			}
 			tmp = tmp->next;
 		}
+		node = node->next;
 	}
 }

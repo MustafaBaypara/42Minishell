@@ -53,6 +53,7 @@ int				rdr_position(t_command *cmds);
 void			expander(t_global *g);
 int				dollar(t_global	*g, char **value);
 int				home(t_global *g, char **value, size_t i, char *tmp);
+void            remove_empty_elements(char **arr);
 
 // HEREDOC
 int				heredocs(t_global *g, t_command *cmd);

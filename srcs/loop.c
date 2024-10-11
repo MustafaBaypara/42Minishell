@@ -17,15 +17,15 @@
 
 static int	line_reader(t_global *g)
 {
-	g->command_line = check_malloc(readline("minishell> "));
+	g->command_line = readline("minishell> ");
 	if (!g->command_line)
 		return (rl_clear_history(), error_program(0, 1), (-1));
 	else if (!g->command_line[0])
-		return (0);
+		return (free(g->command_line), 0);
 	else if (!check_space(g->command_line))
-		return (0);
-	else
-		add_history(g->command_line);
+		return (free(g->command_line), 0);
+	g->command_line = check_malloc(g->command_line);
+	add_history(g->command_line);
 	return (1);
 }
 

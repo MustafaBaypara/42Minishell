@@ -12,6 +12,24 @@
 
 #include "../../include/minishell.h"
 
+void	remove_empty_elements(char **arr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (!arr)
+		return;
+	while (arr[i])
+	{
+		if (arr[i] != NULL && ft_strncmp(arr[i], "", 1) != 0)
+			arr[j++] = arr[i];
+		i++;
+	}
+	arr[j] = NULL;
+}
+
 int	home(t_global *g, char **value, size_t i, char *tmp)
 {
 	char	*str;
@@ -44,24 +62,22 @@ int	home(t_global *g, char **value, size_t i, char *tmp)
 int	dollar(t_global	*g, char **value)
 {
 	char	*tmp;
-	char	*str;
 	size_t	i;
 	size_t	start;
 
 	i = 0;
 	tmp = check_malloc(ft_strdup(""));
-	str = *value;
-	while (str[i])
+	while ((*value)[i])
 	{
-		if (str[i] == '$' && !g->single_quotes)
-			tmp = dollar_sign(tmp, str, &i, g);
+		if ((*value)[i] == '$' && !g->single_quotes)
+			tmp = dollar_sign(tmp, (*value), &i, g);
 		else
 		{
 			start = i;
-			while (str[i] && !(str[i] == '$' && !g->single_quotes))
-				toggle_quote(str[i++], &g->single_quotes, &g->double_quotes);
+			while ((*value)[i] && !((*value)[i] == '$' && !g->single_quotes))
+				toggle_quote((*value)[i++], &g->single_quotes, &g->double_quotes);
 			tmp = check_malloc(ft_strjoin(tmp, \
-			check_malloc(ft_substr(str, start, i))));
+			check_malloc(ft_substr((*value), start, i))));
 		}
 	}
 	return (*value = tmp, 1);
