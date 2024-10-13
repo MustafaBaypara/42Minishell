@@ -2,7 +2,8 @@
     "files.associations": {
         "*.py": "python",
         "*.cs": "csharp",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "libft.h": "c"
     },
     "editor.autoClosingBrackets": "always"
 }

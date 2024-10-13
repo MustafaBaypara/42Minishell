@@ -58,7 +58,11 @@ int	home(t_global *g, char **value, size_t i, char *tmp)
 	}
 	return (*value = tmp, 1);
 }
-
+char	*append_literal(char *tmp, char *token_value, size_t *start, size_t *i)
+{
+	tmp = ft_strappend(tmp, &token_value[*start], *i - *start);
+	return (tmp);
+}
 int	dollar(t_global	*g, char **value)
 {
 	char	*tmp;
@@ -76,8 +80,7 @@ int	dollar(t_global	*g, char **value)
 			start = i;
 			while ((*value)[i] && !((*value)[i] == '$' && !g->single_quotes))
 				toggle_quote((*value)[i++], &g->single_quotes, &g->double_quotes);
-			tmp = check_malloc(ft_strjoin(tmp, \
-			check_malloc(ft_substr((*value), start, i))));
+			tmp = check_malloc(append_literal(tmp, *value, &start, &i));
 		}
 	}
 	return (*value = tmp, 1);

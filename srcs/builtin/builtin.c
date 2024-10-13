@@ -31,7 +31,7 @@ static int	execute_builtin(t_command *cmd, int num,
 
 	g = _global(NULL);
 	if (!(*f)(cmd, g))
-		return (error_program(0, 12), 1);
+		return (error_program(0, g->error_no), 1);
 	if (num)
 		error_program(0, g->error_no);
 	return (0);

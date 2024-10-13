@@ -21,23 +21,30 @@ static int	export_del(t_list **lst, char *str)
 	tmp = *lst;
 	prev = NULL;
 	if (!tmp)
-		return (1);
+		return (1); // Liste boşsa 1 döner
+
 	env = (t_env *)tmp->content;
 	if (ft_strncmp(env->key, str, ft_strlen(str)) == 0)
-		return (*lst = tmp->next, 1);
+	{
+		*lst = tmp->next; // Baş düğüm siliniyorsa başı güncelle
+		// Burada garbage collector ile bellek yönetimi
+		return (0); // Silme başarılı
+	}
+
 	while (tmp)
 	{
 		env = (t_env *)tmp->content;
 		if (ft_strncmp(env->key, str, ft_strlen(str)) == 0)
 		{
 			if (prev)
-				prev->next = tmp->next;
-			return (1);
+				prev->next = tmp->next; // Düğüm bulunursa bağlantıyı güncelle
+			// Burada garbage collector ile bellek yönetimi
+			return (0); // Silme başarılı
 		}
-		prev = tmp;
-		tmp = tmp->next;
+		prev = tmp; // Önceki düğümü güncelle
+		tmp = tmp->next; // Sonraki düğüme geç
 	}
-	return (1);
+	return (1); // Düğüm bulunamazsa 1 döner
 }
 
 int	unset(t_command *cmd, t_global *g)
@@ -46,9 +53,13 @@ int	unset(t_command *cmd, t_global *g)
 
 	i = 0;
 	if (!check_flag(cmd))
-		return (g->error_no = 1, 1);
-	while (cmd->value[++i])
+		return (g->error_no = 1, 1); // Hatalı bayrak varsa 1 döner
+
+	while (cmd->value[++i]) // cmd->value'daki her elemanı kontrol et
+	{
 		if (export_del(&g->env, cmd->value[i]) == 0)
-			return (0);
-	return (g->error_no = 0, 1);
+			return (0); // Düğüm silindiyse 0 döner
+	}
+	return (g->error_no = 0, 1); // Tüm işlemler başarılıysa 1 döner
 }
+

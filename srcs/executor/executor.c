@@ -40,7 +40,7 @@ static void	fd_config(t_global *g, t_command *cmd, int *i)
 		if (cmd->p_type == 2)
 		{
 			if (pipe(fd) == -1)
-				return (error_program(ERROR_PIPE, g->error_no));
+				return (error_program(ERROR_PIPE, 1));
 			cmd->fd[1] = fd[1];
 			cmd->next->fd[0] = fd[0];
 		}
@@ -77,8 +77,8 @@ static void	execute_it(t_command *cmd, t_global *g, int i, int num)
 			close(cmd->fd[0]);
 		close_fds(cmd->next, i);
 		execve(cmd->cmdpath, cmd->value, g->the_env);
-		perror("Execve");
-		g->error_no = 1;
+		// perror("Execve");
+		// g->error_no = 1;
 		error_program(0, g->error_no);
 	}
 	catch_signal(3);
@@ -99,7 +99,7 @@ void	run(t_global *g, t_command *cmd, int i, int num)
 			return (catch_signal(3));
 		catch_signal(2);
 	}
-	if (builtin_check(cmd, num) == 0)
+	if (!builtin_check(cmd, num))
 		return ;
 	else if (is_command_ok(cmd, g))
 		execute_it(cmd, g, i, num);
@@ -116,11 +116,11 @@ void	executor(t_global *g)
 	int			i;
 	int			num;
 
+	if (g->control == 0)
+		return ;
 	i = 0;
 	num = 0;
 	cmd = g->cmd_list;
-	if (g->control == 0)
-		return ;
 	g->path = check_malloc_split(ft_split(env_finder("PATH")->value, ':'));
 	fd_config(g, cmd, &i);
 	if (cmd && cmd->next)
@@ -135,6 +135,6 @@ void	executor(t_global *g)
 			close(cmd->fd[0]);
 		cmd = cmd->next;
 	}
-	wait_func(g, cmd);
+	wait_func(g, g->cmd_list);
 	prepare_next(g);
 }
