@@ -108,7 +108,6 @@ static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 		close(fd[1]);
 		if (heredoc_wait(g, cmd) == SIGINT)
 			return (close(fd[0]), SIGINT);
-		ft_putstr_fd("anananasdfasd", fd[1]);
 		cmd->the_fd = fd[0];
 	}
 	return (1);

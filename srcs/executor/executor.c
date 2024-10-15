@@ -104,8 +104,7 @@ void	run(t_global *g, t_command *cmd, int i, int num)
 	else
 	{
 		if (num)
-			error_program("hata\n", g->error_no);
-		// hata
+			error_program(0, g->error_no);
 	}
 }
 

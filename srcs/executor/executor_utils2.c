@@ -71,7 +71,6 @@ void	wait_func(t_global *g, t_command *cmd)
 
 static int	check_file(t_command *cmd, int fd, int i)
 {
-	printf("fd %d\n", i);
 	if (i == -1)
 		return (0);
 	if (fd == STDIN_FILENO)
@@ -106,7 +105,7 @@ int	files(t_command *cmd, size_t *i, int fd)
 	else if (!ft_strncmp(cmd->rds[*i], "<<", 2))
 	{
 		++(*i);
-		check_file(cmd, STDIN_FILENO, cmd->the_fd);
+		dup2(cmd->the_fd, STDIN_FILENO);
 	}
 	else if (!ft_strncmp(cmd->rds[*i], ">", 1))
 	{
