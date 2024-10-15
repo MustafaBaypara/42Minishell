@@ -131,6 +131,8 @@ void	executor(t_global *g)
 			close(cmd->fd[1]);
 		if (cmd->fd[0] != STDIN_FILENO)
 			close(cmd->fd[0]);
+		if (cmd->the_fd != STDIN_FILENO)
+			close(cmd->the_fd);
 		cmd = cmd->next;
 	}
 	wait_func(g, g->cmd_list);

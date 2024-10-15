@@ -77,13 +77,13 @@ static int	check_file(t_command *cmd, int fd, int i)
 	{
 		if (cmd->fd[0] != STDIN_FILENO)
 			close(cmd->fd[0]);
-		cmd->fd[0] = i;
+		cmd->fd[0] = dup(i);
 	}
 	else if (fd == STDOUT_FILENO)
 	{
 		if (cmd->fd[1] != STDOUT_FILENO)
 			close(cmd->fd[1]);
-		cmd->fd[1] = i;
+		cmd->fd[1] = dup(i);
 	}
 	return (1);
 }
@@ -105,7 +105,7 @@ int	files(t_command *cmd, size_t *i, int fd)
 	else if (!ft_strncmp(cmd->rds[*i], "<<", 2))
 	{
 		++(*i);
-		dup2(cmd->the_fd, STDIN_FILENO);
+		check_file(cmd, STDIN_FILENO, cmd->the_fd);
 	}
 	else if (!ft_strncmp(cmd->rds[*i], ">", 1))
 	{

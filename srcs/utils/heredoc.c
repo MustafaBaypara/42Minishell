@@ -128,6 +128,7 @@ int	heredocs(t_global *g, t_command *cmd)
 		{
 			if (!ft_strncmp(cmd->rds[i], "<<", 2))
 			{
+				close(fd[0]);
 				if (pipe(fd) == -1)
 					return (error_program(ERROR_PIPE, 1), 0);
 				i++;
