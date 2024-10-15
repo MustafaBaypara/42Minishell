@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:36 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/02 17:49:35 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:58:13 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	wait_func(t_global *g, t_command *cmd)
 
 static int	check_file(t_command *cmd, int fd, int i)
 {
+	printf("fd %d\n", i);
 	if (i == -1)
 		return (0);
 	if (fd == STDIN_FILENO)

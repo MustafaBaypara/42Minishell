@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 15:41:48 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:19:20 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	run(t_global *g, t_command *cmd, int i, int num)
 	else
 	{
 		if (num)
-			error_program(ERROR_FORK, g->error_no);
+			error_program("hata\n", g->error_no);
+		// hata
 	}
 }
 

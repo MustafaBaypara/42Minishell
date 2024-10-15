@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:44:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 17:54:16 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:32:57 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	put_env(t_list *lst, int fd)
 
 int	env(t_command *c, t_global *g)
 {
+	//argüman olmayacak
 	if (!check_flag(c))
 		return (g->error_no = 1, 1);
 	put_env(g->env, c->fd[1]);

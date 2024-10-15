@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:42:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/01 16:54:43 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:25:26 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,12 @@ void	parent_sigint2(int sig)
 	rl_replace_line("", 0);
 }
 
-void	echo_check(void)
-{
-	struct termios	tty;
-
-	if (!tcgetattr(STDIN_FILENO, &tty))
-	{
-		tty.c_lflag &= ~ECHOCTL;
-		tcsetattr(STDIN_FILENO, TCSANOW, &tty);
-	}
-}
-
 void	heredoc_sig(int sig)
 {
 	(void)sig;
 	ft_putchar_fd('\n', 1);
 	_global(NULL)->error_no = 1;
-	error_program("", 1);
+	error_program(0, 1);
 }
 
 void	catch_signal(int num)

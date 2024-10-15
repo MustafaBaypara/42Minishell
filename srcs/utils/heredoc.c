@@ -6,13 +6,14 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/06 18:21:26 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:20:00 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <readline/readline.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 static void	*heredoc_expander(char *s, t_global *g)
 {
@@ -107,6 +108,7 @@ static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 		close(fd[1]);
 		if (heredoc_wait(g, cmd) == SIGINT)
 			return (close(fd[0]), SIGINT);
+		ft_putstr_fd("anananasdfasd", fd[1]);
 		cmd->the_fd = fd[0];
 	}
 	return (1);

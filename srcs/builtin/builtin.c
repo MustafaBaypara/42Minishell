@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:57:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/11 18:18:40 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:38:15 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	msh_lstsort(t_list **lst)
 	void	*content;
 	int		i;
 
+	// env key göre sıralanacak
 	i = 0;
 	node = *lst;
 	while (node)

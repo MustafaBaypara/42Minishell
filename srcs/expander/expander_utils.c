@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:09:07 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 15:56:39 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:01:25 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	home(t_global *g, char **value, size_t i, char *tmp)
 			{
 				if (!env_finder("HOME"))
 					return (1);
-				tmp = ft_strjoin(tmp, env_finder("HOME")->value);
+				tmp = check_malloc(ft_strjoin(tmp, env_finder("HOME")->value));
 			}
 		}
 		else
-			tmp = ft_strjoin(tmp, "~");
+			tmp = check_malloc(ft_strjoin(tmp, "~"));
 		toggle_quote(str[i], &g->single_quotes, &g->double_quotes);
 		i++;
 	}
