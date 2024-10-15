@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:43:59 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 19:43:24 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:26:30 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	cd_sync(t_global *g, char *path, char *oldpwd, char *wd)
 {
 	if (!chdir(path))
 	{
-		wd = check_malloc(getcwd(NULL, 0));
+		wd = getcwd(NULL, 0);
 		if (!wd)
-			error_program("error: getcwd", 1);
+			wd = ft_strdup(env_finder("PWD")->value);
+		wd = check_malloc(wd);
 		if (!sync_env(&g->env, "OLDPWD", oldpwd)
 			|| !sync_env(&g->env, "PWD", wd))
 			error_program(ERROR_MALLOC, 12);

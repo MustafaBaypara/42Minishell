@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:27:16 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 17:01:49 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:26:44 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	cd(t_command *cmd, t_global *g)
 
 	if (!check_flag(cmd))
 		return (1);
-	wd = check_malloc(getcwd(NULL, 0));
+	wd = getcwd(NULL, 0);
+	if (!wd)
+		wd = ft_strdup(env_finder("PWD")->value);
+	wd = check_malloc(wd);
 	env_pwd = sync_env(&g->env, "PWD", wd);
 	if (!env_pwd)
 	{

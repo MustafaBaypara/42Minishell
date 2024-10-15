@@ -3,7 +3,8 @@
         "*.py": "python",
         "*.cs": "csharp",
         "minishell.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "type_traits": "c"
     },
     "editor.autoClosingBrackets": "always"
 }
