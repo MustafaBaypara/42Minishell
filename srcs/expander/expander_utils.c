@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:09:07 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/11 18:08:56 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:56:39 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	remove_empty_elements(char **arr)
 	i = 0;
 	j = 0;
 	if (!arr)
-		return;
+		return ;
 	while (arr[i])
 	{
 		if (arr[i] != NULL && ft_strncmp(arr[i], "", 1) != 0)
@@ -58,11 +58,13 @@ int	home(t_global *g, char **value, size_t i, char *tmp)
 	}
 	return (*value = tmp, 1);
 }
+
 char	*append_literal(char *tmp, char *token_value, size_t *start, size_t *i)
 {
 	tmp = ft_strappend(tmp, &token_value[*start], *i - *start);
 	return (tmp);
 }
+
 int	dollar(t_global	*g, char **value)
 {
 	char	*tmp;
@@ -79,7 +81,8 @@ int	dollar(t_global	*g, char **value)
 		{
 			start = i;
 			while ((*value)[i] && !((*value)[i] == '$' && !g->single_quotes))
-				toggle_quote((*value)[i++], &g->single_quotes, &g->double_quotes);
+				toggle_quote((*value)[i++],
+					&g->single_quotes, &g->double_quotes);
 			tmp = check_malloc(append_literal(tmp, *value, &start, &i));
 		}
 	}

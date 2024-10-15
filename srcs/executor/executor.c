@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/11 18:18:35 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:41:48 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void	execute_it(t_command *cmd, t_global *g, int i, int num)
 			close(cmd->fd[0]);
 		close_fds(cmd->next, i);
 		execve(cmd->cmdpath, cmd->value, g->the_env);
-		// perror("Execve");
-		// g->error_no = 1;
 		error_program(0, g->error_no);
 	}
 	catch_signal(3);

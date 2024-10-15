@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:15:36 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/08 17:27:39 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:44:18 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	exit_func(t_command *cmd, t_global *g)
 		else
 		{
 			ft_putendl_fd("exit: numeric argument required", 2);
-			g->error_no = 255;
+			g->error_no = 2;
 		}
 	}
 	error_program(0, g->error_no);

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:27:16 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 14:26:44 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:53:39 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,18 @@ int	cd(t_command *cmd, t_global *g)
 
 	if (!check_flag(cmd))
 		return (1);
+	if (cmd->value[2])
+	{
+		ft_putendl_fd(" too many arguments", 2);
+		error_program(0, 1);
+	}
 	wd = getcwd(NULL, 0);
 	if (!wd)
 		wd = ft_strdup(env_finder("PWD")->value);
 	wd = check_malloc(wd);
 	env_pwd = sync_env(&g->env, "PWD", wd);
 	if (!env_pwd)
-	{
-		g->error_no = 1;
-		error_program(0, g->error_no);
-	}
+		error_program(0, 1);
 	path = get_path(cmd, env_finder("OLDPWD"), env_finder("HOME"));
 	cd_sync(g, path, env_pwd->value, NULL);
 	g->the_env = list_to_char(g->env);
