@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 18:20:00 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:54:56 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <readline/readline.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <unistd.h>
 
 static void	*heredoc_expander(char *s, t_global *g)
 {
@@ -45,7 +46,7 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
 
 	while (1)
 	{
-		line = check_malloc(readline("> "));
+		line = (readline("> "));
 		if (!line || (!ft_strncmp(line, d, ft_strlen(line)) \
 		&& !ft_strncmp(line, d, ft_strlen(d))))
 		{
@@ -53,6 +54,7 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
 			g->error_no = 0;
 			error_program(0, g->error_no);
 		}
+		line = check_malloc(line);
 		line = heredoc_expander(line, g);
 		if (!line)
 		{
@@ -108,7 +110,8 @@ static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 		close(fd[1]);
 		if (heredoc_wait(g, cmd) == SIGINT)
 			return (close(fd[0]), SIGINT);
-		cmd->the_fd = fd[0];
+		cmd->the_fd = dup(fd[0]);
+		close(fd[0]);
 	}
 	return (1);
 }
@@ -128,10 +131,9 @@ int	heredocs(t_global *g, t_command *cmd)
 		{
 			if (!ft_strncmp(cmd->rds[i], "<<", 2))
 			{
-				close(fd[0]);
-				if (pipe(fd) == -1)
+				close(cmd->the_fd);
+				if (pipe(fd) == -1 || i++ == -1)
 					return (error_program(ERROR_PIPE, 1), 0);
-				i++;
 				cmd->rds[i] = quote_clean(cmd->rds[i], 0, 0);
 				if (loop_heredoc(g, fd, cmd, cmd->rds[i]) == SIGINT)
 					return (catch_signal(1), 0);

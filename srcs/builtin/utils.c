@@ -6,11 +6,13 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:43:59 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 14:26:30 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:23:36 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <unistd.h>
+#include <stdio.h>
 
 t_env	*add_env(t_list **g_env, char *key, char *value)
 {

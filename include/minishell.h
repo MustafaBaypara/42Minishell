@@ -6,14 +6,13 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 15:57:41 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:30:42 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "unistd.h"
 # include "../srcs/libft/libft.h"
 # include "shellutils.h"
 # include "errorlib.h"
@@ -62,7 +61,7 @@ int				heredocs(t_global *g, t_command *cmd);
 void			catch_signal(int num);
 
 // EXECUTOR
-void			executor(t_global *g);
+void			executor(t_global *g, int i, int num);
 void			wait_func(t_global *g, t_command *cmd);
 int				files(t_command *cmd, size_t *i, int fd);
 int				check_slash(char *val);
@@ -86,7 +85,7 @@ int				set_env(t_env *env, char *val);
 t_env			*add_env(t_list **g_env, char *key, char *value);
 t_list			*msh_lstcpy(t_list *lst);
 int				export(t_command *cmd, t_global *g);
-void			msh_lstsort(t_list **lst);
+void			msh_lstsort(t_list **lst, t_env *env, t_env *tmp_env);
 int				unset(t_command *cmd, t_global *g);
 
 #endif

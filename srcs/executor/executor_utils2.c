@@ -6,13 +6,15 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:36 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 17:58:13 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:45:19 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "sys/wait.h"
 #include "fcntl.h"
+#include <unistd.h>
+#include <stdio.h>
 
 int	check_slash(char *val)
 {

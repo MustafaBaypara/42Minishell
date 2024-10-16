@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:37:27 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 14:58:49 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:19:48 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define SHELLUTILS_H
 
 # define INVALID_ARG 1
-
-# include "stdio.h"
 
 typedef enum e_token_types
 {

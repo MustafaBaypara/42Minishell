@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 16:36:20 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/16 14:23:52 by mbaypara         ###   ########.fr       */
+/*   Created: 2024/10/16 14:58:16 by mbaypara          #+#    #+#             */
+/*   Updated: 2024/10/16 14:58:21 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include <unistd.h>
+#include "libft.h"
 
-int	pwd(t_command *cmd, t_global *g)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char	*pwd;
+	size_t	i;
 
-	if (!check_flag(cmd))
-		return (1);
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		pwd = check_malloc(pwd);
-		ft_putendl_fd(pwd, cmd->fd[1]);
-	}
-	else
-		ft_putendl_fd(env_finder("PWD")->value, cmd->fd[1]);
-	return (g->error_no = 0, 1);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

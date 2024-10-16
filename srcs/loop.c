@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/10 17:03:15 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:31:00 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	loop(t_global *g)
 		lexer(g);
 		parser(g);
 		expander(g);
-		executor(g);
+		executor(g, 0, 0);
 		catch_signal(1);
 		g->control = 1;
 	}

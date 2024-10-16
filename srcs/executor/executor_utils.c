@@ -6,12 +6,13 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:13 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/07 15:17:03 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:21:57 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <sys/stat.h>
+#include <unistd.h>
 
 static int	check_path(t_command *cmd, t_global *g, int *i)
 {

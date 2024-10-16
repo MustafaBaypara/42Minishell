@@ -6,11 +6,13 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 18:19:20 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:48:08 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <unistd.h>
+#include <stdio.h>
 
 static int	rdr_network(t_global *g, t_command **cmd)
 {
@@ -108,16 +110,12 @@ void	run(t_global *g, t_command *cmd, int i, int num)
 	}
 }
 
-void	executor(t_global *g)
+void	executor(t_global *g, int i, int num)
 {
 	t_command	*cmd;
-	int			i;
-	int			num;
 
 	if (g->control == 0)
 		return ;
-	i = 0;
-	num = 0;
 	cmd = g->cmd_list;
 	g->path = check_malloc_split(ft_split(env_finder("PATH")->value, ':'));
 	fd_config(g, cmd, &i);

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:57:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 16:38:15 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:59:40 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ int	builtin_check(t_command *cmd, int num)
 {
 	if (!cmd->value[0])
 		return (1);
-	if (!ft_strncmp(cmd->value[0], "echo", ft_strlen("echo")))
+	if (!ft_strcmp(cmd->value[0], "echo"))
 		return (execute_builtin(cmd, num, echo));
-	else if (!ft_strncmp(cmd->value[0], "cd", ft_strlen("cd")))
+	else if (!ft_strcmp(cmd->value[0], "cd"))
 		return (execute_builtin(cmd, num, cd));
-	else if (!ft_strncmp(cmd->value[0], "pwd", ft_strlen("pwd")))
+	else if (!ft_strcmp(cmd->value[0], "pwd"))
 		return (execute_builtin(cmd, num, pwd));
-	else if (!ft_strncmp(cmd->value[0], "env", ft_strlen("env")))
+	else if (!ft_strcmp(cmd->value[0], "env"))
 		return (execute_builtin(cmd, num, env));
-	else if (!ft_strncmp(cmd->value[0], "unset", ft_strlen("unset")))
+	else if (!ft_strcmp(cmd->value[0], "unset"))
 		return (execute_builtin(cmd, num, unset));
-	else if (!ft_strncmp(cmd->value[0], "export", ft_strlen("export")))
+	else if (!ft_strcmp(cmd->value[0], "export"))
 		return (execute_builtin(cmd, num, export));
-	else if (!ft_strncmp(cmd->value[0], "exit", ft_strlen("exit")))
+	else if (!ft_strcmp(cmd->value[0], "exit"))
 		return (execute_builtin(cmd, num, exit_func));
 	return (1);
 }
@@ -76,23 +76,24 @@ t_list	*msh_lstcpy(t_list *lst)
 	return (env);
 }
 
-void	msh_lstsort(t_list **lst)
+void	msh_lstsort(t_list **lst, t_env *env, t_env *tmp_env)
 {
 	t_list	*tmp;
 	t_list	*node;
 	void	*content;
 	int		i;
 
-	// env key göre sıralanacak
 	i = 0;
 	node = *lst;
 	while (node)
 	{
+		env = (t_env *)node->content;
 		tmp = node->next;
 		while (tmp)
 		{
-			i = ft_strlen(node->content);
-			if (ft_strncmp(node->content, tmp->content, i) > 0)
+			tmp_env = (t_env *)tmp->content;
+			i = ft_strlen(env->key);
+			if (ft_strncmp(env->key, tmp_env->key, i) > 0)
 			{
 				content = node->content;
 				node->content = tmp->content;
