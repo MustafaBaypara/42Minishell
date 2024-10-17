@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <stdio.h>
 #include <unistd.h>
 #include <readline/readline.h>
 

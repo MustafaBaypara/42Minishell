@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include "stdlib.h"
 
 void	*add_list(t_list **list, void *garbage)
 {

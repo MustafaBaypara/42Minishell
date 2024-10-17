@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "libft/libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 

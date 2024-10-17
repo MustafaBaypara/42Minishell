@@ -13,7 +13,6 @@
 #include "../../include/minishell.h"
 #include <readline/readline.h>
 #include <sys/wait.h>
-#include <signal.h>
 #include <unistd.h>
 
 static void	*heredoc_expander(char *s, t_global *g)

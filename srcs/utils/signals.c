@@ -13,8 +13,6 @@
 #include "../../include/minishell.h"
 #include <signal.h>
 #include <readline/readline.h>
-#include <unistd.h>
-#include <termios.h>
 
 void	ctrl_c(int num)
 {
