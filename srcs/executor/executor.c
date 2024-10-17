@@ -37,6 +37,10 @@ static void	fd_config(t_global *g, t_command *cmd, int *i)
 {
 	int	fd[2];
 
+	if (env_finder("PATH"))
+		g->path = check_malloc_split(ft_split(env_finder("PATH")->value, ':'));
+	else
+		g->path = check_malloc_split(ft_split(env_finder("PWD")->value, ':'));
 	while (cmd)
 	{
 		if (cmd->p_type == 2)
@@ -117,8 +121,6 @@ void	executor(t_global *g, int i, int num)
 	if (g->control == 0)
 		return ;
 	cmd = g->cmd_list;
-	if (env_finder("PATH"))
-		g->path = check_malloc_split(ft_split(env_finder("PATH")->value, ':'));
 	fd_config(g, cmd, &i);
 	if (cmd && cmd->next)
 		num = 1;

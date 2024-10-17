@@ -21,16 +21,18 @@ static int	valid_identifier(t_command *cmd, t_global *g, int i)
 	return (0);
 }
 
-static t_env	*export_sync_env(t_command *cmd, t_global *g, char *key, int i)
+static int	export_sync_env(t_command *cmd, t_global *g, char *key, int i)
 {
 	char	*str;
 	char	*value;
-	t_env	*res;
 
 	str = check_malloc(ft_substr(cmd->value[i], 0, key - cmd->value[i]));
-	value = check_malloc(ft_strdup(key + 1));
-	res = sync_env(&g->env, str, value);
-	return (res);
+	if (!ft_strlen(key))
+		value = check_malloc(ft_strdup(""));
+	else
+		value = check_malloc(ft_strdup(key + 1));
+	sync_env(&g->env, str, value);
+	return (1);
 }
 
 static int	export_command(t_command *cmd, t_global *g)
@@ -71,7 +73,7 @@ static void	export_declare(t_list *list, int fd)
 		env = (t_env *)print->content;
 		ft_putstr_fd("declare -x ", fd);
 		ft_putstr_fd(env->key, fd);
-		if (env->value)
+		if (env->value && env->value[0])
 		{
 			ft_putstr_fd("=\"", fd);
 			ft_putstr_fd(env->value, fd);

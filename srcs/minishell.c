@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 #include <stdio.h>
+#include <unistd.h>
 #include <readline/readline.h>
 
 static char	*ft_strjoin_triple(char *one, char *two, char *three)
@@ -82,11 +83,13 @@ int	main(int ac, char **av, char **env)
 		error_program(ERROR_ARG, 1);
 	if (!(*env))
 	{
-		envtwo = ft_calloc(4, sizeof(char *));
-		envtwo[0] = ft_strdup("PWD= ");
-		envtwo[1] = ft_strdup("PATH= ");
-		envtwo[2] = ft_strdup("HOME= ");
-		envtwo[3] = 0;
+		envtwo = check_malloc(ft_calloc(2, sizeof(char *)));
+		envtwo[0] = getcwd(NULL, 0);
+		if (!envtwo[0])
+			envtwo[0] = ft_strdup("PWD= ");
+		else
+			envtwo[0] = ft_strjoin(check_malloc(ft_strdup("PWD=")), envtwo[0]);
+		envtwo[0] = check_malloc(envtwo[0]);
 		global.env = env_dup(envtwo);
 	}
 	else

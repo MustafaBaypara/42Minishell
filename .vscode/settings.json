@@ -4,7 +4,8 @@
         "*.cs": "csharp",
         "minishell.h": "c",
         "libft.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "stdio.h": "c"
     },
     "editor.autoClosingBrackets": "always"
 }

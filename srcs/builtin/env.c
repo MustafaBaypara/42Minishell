@@ -16,18 +16,16 @@ static void	put_env(t_list *lst, int fd)
 {
 	t_env	*env;
 
-	env = (t_env *)lst->content;
 	while (lst)
 	{
-		if (env->value && env->key)
+		env = (t_env *)lst->content;
+		if (env->value && env->key && env->value[0])
 		{
 			ft_putstr_fd(env->key, fd);
 			ft_putstr_fd("=", fd);
 			ft_putendl_fd(env->value, fd);
 		}
 		lst = lst->next;
-		if (lst)
-			env = (t_env *)lst->content;
 	}
 }
 
