@@ -28,7 +28,8 @@ static void	remove_quotes_inplace(char **c_val)
 		while ((*c_val)[i])
 		{
 			toggle_quote((*c_val)[i], &in_s, &in_d);
-			if (((*c_val)[i] == '\'' && !in_d) || ((*c_val)[i] == '"' && !in_s))
+			if (((*c_val)[i] == '\'' && !in_d)
+				|| ((*c_val)[i] == '"' && !in_s))
 				i++;
 			else
 				(*c_val)[j++] = (*c_val)[i++];
