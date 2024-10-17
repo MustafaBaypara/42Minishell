@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/16 16:54:56 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:03:06 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int	heredocs(t_global *g, t_command *cmd)
 
 	if (check_hdoc(cmd) == 0)
 		return (1);
-	catch_signal(5);
 	while (cmd)
 	{
 		i = -1;
@@ -131,7 +130,8 @@ int	heredocs(t_global *g, t_command *cmd)
 		{
 			if (!ft_strncmp(cmd->rds[i], "<<", 2))
 			{
-				close(cmd->the_fd);
+				if (cmd->the_fd != -1)
+					close(cmd->the_fd);
 				if (pipe(fd) == -1 || i++ == -1)
 					return (error_program(ERROR_PIPE, 1), 0);
 				cmd->rds[i] = quote_clean(cmd->rds[i], 0, 0);

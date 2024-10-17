@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:42:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 17:25:26 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 16:26:11 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ctrl_c(int num)
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
+	_global(NULL)->error_no = 128 + num;
 	rl_redisplay();
 }
 
@@ -37,8 +38,7 @@ void	heredoc_sig(int sig)
 {
 	(void)sig;
 	ft_putchar_fd('\n', 1);
-	_global(NULL)->error_no = 1;
-	error_program(0, 1);
+	error_program(0, 128 + sig);
 }
 
 void	catch_signal(int num)

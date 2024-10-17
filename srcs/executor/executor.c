@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/16 16:48:08 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:10:14 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ void	executor(t_global *g, int i, int num)
 	if (g->control == 0)
 		return ;
 	cmd = g->cmd_list;
-	g->path = check_malloc_split(ft_split(env_finder("PATH")->value, ':'));
+	if (env_finder("PATH"))
+		g->path = check_malloc_split(ft_split(env_finder("PATH")->value, ':'));
 	fd_config(g, cmd, &i);
 	if (cmd && cmd->next)
 		num = 1;
@@ -129,7 +130,7 @@ void	executor(t_global *g, int i, int num)
 			close(cmd->fd[1]);
 		if (cmd->fd[0] != STDIN_FILENO)
 			close(cmd->fd[0]);
-		if (cmd->the_fd != STDIN_FILENO)
+		if (cmd->the_fd >= STDIN_FILENO)
 			close(cmd->the_fd);
 		cmd = cmd->next;
 	}

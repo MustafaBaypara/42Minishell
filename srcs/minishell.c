@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/16 14:44:01 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:21:56 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,22 @@ void	init_global(t_global *g)
 int	main(int ac, char **av, char **env)
 {
 	t_global	global;
+	char		**envtwo;
 
 	init_global(&global);
 	if (ac != 1 || av[1])
 		error_program(ERROR_ARG, 1);
-	global.env = env_dup(env);
+	if (!(*env))
+	{
+		envtwo = ft_calloc(4, sizeof(char *));
+		envtwo[0] = ft_strdup("PWD= ");
+		envtwo[1] = ft_strdup("PATH= ");
+		envtwo[2] = ft_strdup("HOME= ");
+		envtwo[3] = 0;
+		global.env = env_dup(envtwo);
+	}
+	else
+		global.env = env_dup(env);
 	global.the_env = list_to_char(global.env);
 	loop(&global);
 	rl_clear_history();

@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:27:16 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/16 14:23:06 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:19:58 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	cd(t_command *cmd, t_global *g)
 
 	if (!check_flag(cmd))
 		return (1);
-	if (cmd->value[2])
+	if (cmd->value[0] && cmd->value[1] && cmd->value[2])
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", 2);
 		return (g->error_no = 1, 1);

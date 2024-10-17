@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:04:34 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/15 15:56:17 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 16:21:36 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	export_del(t_list **lst, char *str)
 		{
 			if (prev)
 				prev->next = tmp->next;
-			return (0);
+			return (1);
 		}
 		prev = tmp;
 		tmp = tmp->next;

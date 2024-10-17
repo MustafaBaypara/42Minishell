@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:35:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/06 18:17:25 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:01:57 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	check_hdoc(t_command *cmd)
 	int	i;
 	int	j;
 
+	catch_signal(5);
 	j = 0;
 	while (cmd)
 	{
