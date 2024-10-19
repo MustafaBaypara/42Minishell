@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:31:54 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 18:05:57 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/19 18:19:22 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	line_reader(t_global *g)
 {
 	g->command_line = readline("minishell> ");
 	if (!g->command_line)
-		return (rl_clear_history(), error_program(0, 1), (-1));
+		return (rl_clear_history(), error_program("exit", g->error_no), (-1));
 	else if (!g->command_line[0])
 		return (free(g->command_line), 0);
 	else if (!check_space(g->command_line))
