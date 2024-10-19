@@ -33,12 +33,13 @@ static t_command	*cmd_init(t_list *token)
 	if (!token)
 		return (NULL);
 	cmd = check_malloc(ft_calloc(1, sizeof(t_command)));
+	// tokenleri pipe'a kadar alır ve komut oluşturur
 	if (identifier(token->content) == PIPE)
 		token = token->next;
 	i = token_len(token);
 	cmd->value = (char **)check_malloc(ft_calloc((i + 1), sizeof(char *)));
 	cmd->value[i] = NULL;
-	init_value(cmd);
+	init_value(cmd); // komutun değerlerini başlatır
 	return (cmd);
 }
 
@@ -58,30 +59,31 @@ static int	get_token(t_command **cmd, t_list **t, size_t *i)
 
 static int	get_command(t_command **cmd, t_list **t, size_t *i)
 {
-	int		d;
-	int		s;
-	size_t	j;
-	size_t	start;
-	char	*cleanstr;
+    int		d;          // Çift tırnak durumu
+    int		s;          // Tek tırnak durumu
+    size_t	j;          // Döngü sayacı
+    size_t	start;      // Kelimenin başlangıç indeksi
+    char	*cleanstr;  // Temizlenmiş string
 
-	j = 0;
-	d = 0;
-	s = 0;
-	cleanstr = (char *)(*t)->content;
-	while (cleanstr[j])
-	{
-		while (cleanstr[j] && is_white_space(cleanstr[j]) && !d && !s)
-			j++;
-		start = j;
-		if (cleanstr[j])
-		{
-			j = word_end(cleanstr, j, &d, &s);
-			cleanstr = check_malloc(ft_substr(cleanstr, start, j - start));
-			(*cmd)->value[(*i)++] = cleanstr;
-			cleanstr = (char *)(*t)->content;
-		}
-	}
-	return (1);
+    j = 0;
+    d = 0;
+    s = 0;
+    cleanstr = (char *)(*t)->content;  // Token içeriğini al
+	// echo "merhaba dostlar 23" komutunu echo ve "merhaba dostlar 23" olarak ayırır value dizisine ekler
+    while (cleanstr[j])  // Stringin sonuna kadar döngü
+    {
+        while (cleanstr[j] && is_white_space(cleanstr[j]) && !d && !s)  // Boşluk karakterlerini atla
+            j++;
+        start = j;  // Kelimenin başlangıç indeksini belirle
+        if (cleanstr[j])  // Eğer hala karakter varsa
+        {
+            j = word_end(cleanstr, j, &d, &s);  // Kelimenin sonunu belirle
+            cleanstr = check_malloc(ft_substr(cleanstr, start, j - start));  // Kelimeyi ayır ve bellekte yer ayır
+            (*cmd)->value[(*i)++] = cleanstr;  // Komut yapısına kelimeyi ekle
+            cleanstr = (char *)(*t)->content;  // Token içeriğini tekrar al
+        }
+    }
+    return (1);  // Başarılı dönüş
 }
 
 void	parser(t_global *g)
@@ -99,13 +101,28 @@ void	parser(t_global *g)
 	g->cmd_list = cmd;
 	while (token)
 	{
-		if (identifier(token->content) != PIPE)
-			get_command(&cmd, &token, &i);
+		if (identifier(token->content) != PIPE) // pipe değilse tokenları alır
+			get_command(&cmd, &token, &i); // tokenları alır ve value dizisine ekler ["echo", "merhaba dostlar 23"] gibi
 		else
-			get_token(&cmd, &token, &i);
-		token = token->next;
+			get_token(&cmd, &token, &i); // pipe ise komutları birbirine bağlar ve bir sonraki cmd geçer
+		token = token->next; // bir sonraki tokena geçer
 	}
-	rdr_position(cmd);
-	if (!heredocs(g, g->cmd_list))
+	rdr_position(cmd); // yönlendirme operatörlerini kontrol eder ve ayırır
+
+// minishell> cat ls > asd.txt | echo "merhaba dostlar" > asd.txt
+// cmd->value[0]: cat
+// cmd->value[1]: ls
+// cmd->value[2]: (null)
+// cmd->rds[0]: >
+// cmd->rds[1]: asd.txt
+// cmd->rds[2]: (null)
+// cmd->value[0]: echo
+// cmd->value[1]: "merhaba dostlar"
+// cmd->value[2]: (null)
+// cmd->rds[0]: >
+// cmd->rds[1]: asd.txt
+// cmd->rds[2]: (null)
+
+	if (!heredocs(g, g->cmd_list)) // heredoc varsa işler
 		g->control = 0;
 }

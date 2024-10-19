@@ -14,31 +14,31 @@
 
 static void	space_cleaner(t_global *g, t_list *prev)
 {
-	t_list	*tmp;
-	t_list	*head;
+    t_list	*tmp;   // Geçici değişken
+    t_list	*head;  // Listenin başı
 
-	tmp = g->token_list;
-	head = g->token_list;
-	while (tmp)
-	{
-		if (!check_space((char *)tmp->content))
-		{
-			if (head == tmp)
-				g->token_list = tmp->next;
-			else
-				prev->next = tmp->next;
-			remove_from_list(&g->garbage_list, tmp);
-            if (prev)
-			    tmp = prev->next;
+    tmp = g->token_list;  // Token listesinin başını al
+    head = g->token_list; // Listenin başını sakla
+    while (tmp)  // Listenin sonuna kadar döngü
+    {
+        if (!check_space((char *)tmp->content))  // Eğer token boşluksa
+        {
+            if (head == tmp)  // Eğer bu düğüm listenin başıysa
+                g->token_list = tmp->next;  // Listenin başını güncelle
             else
-                tmp = g->token_list;
-		}
-		else
-		{
-			prev = tmp;
-			tmp = tmp->next;
-		}
-	}
+                prev->next = tmp->next;  // Önceki düğümün sonraki işaretçisini güncelle
+            remove_from_list(&g->garbage_list, tmp);  // Düğümü garbage listesinden çıkar
+            if (prev)
+                tmp = prev->next;  // Geçici değişkeni güncelle
+            else
+                tmp = g->token_list;  // Geçici değişkeni güncelle
+        }
+        else
+        {
+            prev = tmp;  // Önceki düğümü güncelle
+            tmp = tmp->next;  // Geçici değişkeni güncelle
+        }
+    }
 }
 
 static int	check_quote(t_list *token, int sq, int dq)

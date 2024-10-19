@@ -1,1 +1,8 @@
-
+Makefile
+stlar
+e
+libft
+ls
+minishell
+objs
+srcs

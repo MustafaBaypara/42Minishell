@@ -51,6 +51,7 @@ size_t	token_len(t_list *list)
 	size_t	len;
 
 	len = 0;
+	// pipe kadar olan kısmı sayar
 	while (list && identifier(list->content) != PIPE)
 	{
 		len += token_value(list->content);
@@ -69,15 +70,15 @@ void	toggle_quote(char c, int *in_s, int *in_d)
 
 size_t	word_end(const char *v, size_t start, int *d, int *s)
 {
-	size_t	j;
+    size_t	j;
 
-	j = start;
-	while (v[j])
-	{
-		toggle_quote(v[j], s, d);
-		if (is_white_space(v[j]) && !(*d) && !(*s))
-			break ;
-		j++;
-	}
-	return (j);
+    j = start;  // Başlangıç indeksini j'ye atar
+    while (v[j])  // Dizinin sonuna kadar döngü
+    {
+        toggle_quote(v[j], s, d);  // Alıntı işaretlerini değiştir
+        if (is_white_space(v[j]) && !(*d) && !(*s))  // Eğer boşluk karakteri ve alıntı işaretleri kapalıysa
+            break ;  // Döngüden çık
+        j++;  // İndeksi artır
+    }
+    return (j);  // Kelimenin son indeksini döndür
 }

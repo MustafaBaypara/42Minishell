@@ -103,7 +103,7 @@ static int	rdr(t_global *g, t_command *clst)
 	}
 	return (0);
 }
-
+#include <stdio.h>
 void	expander(t_global *g)
 {
 	t_command	*cmd;
@@ -113,6 +113,12 @@ void	expander(t_global *g)
 	cmd = g->cmd_list;
 	while (cmd)
 	{
+		printf("cmd->value[0]: %s\n", cmd->value[0]);
+		printf("cmd->value[1]: %s\n", cmd->value[1]);
+		printf("cmd->value[2]: %s\n", cmd->value[2]);
+		printf("cmd->rds[0]: %s\n", cmd->rds[0]);
+		printf("cmd->rds[1]: %s\n", cmd->rds[1]);
+		printf("cmd->rds[2]: %s\n", cmd->rds[2]);
 		if (expand(g, cmd))
 			return (g->error_no = 12, error_program(0, 12));
 		if (rdr(g, cmd))
