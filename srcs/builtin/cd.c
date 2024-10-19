@@ -6,14 +6,14 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:27:16 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/17 18:19:58 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:42:06 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <unistd.h>
 
-static char	*home_path(t_env *home)
+static char	*home_path(t_env *home, t_command *cmd)
 {
 	char	*path;
 
@@ -23,7 +23,11 @@ static char	*home_path(t_env *home)
 		return (path);
 	}
 	else
-		return (NULL);
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", cmd->fd[1]);
+		_global(NULL)->error_no = 1;
+		return (check_malloc(ft_calloc(1, 1)));
+	}
 }
 
 static char	*old_pwd(t_command *cmd, t_env *oldpwd)
@@ -36,7 +40,12 @@ static char	*old_pwd(t_command *cmd, t_env *oldpwd)
 		ft_putendl_fd(path, cmd->fd[1]);
 		return (path);
 	}
-	return (NULL);
+	else
+	{
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", cmd->fd[1]);
+		_global(NULL)->error_no = 1;
+		return (check_malloc(ft_calloc(1, 1)));
+	}
 }
 
 static char	*get_path(t_command *cmd, t_env *oldpwd, t_env *home)
@@ -49,7 +58,7 @@ static char	*get_path(t_command *cmd, t_env *oldpwd, t_env *home)
 			return (old_pwd(cmd, oldpwd));
 	}
 	else
-		return (home_path(home));
+		return (home_path(home, cmd));
 }
 
 int	cd(t_command *cmd, t_global *g)
