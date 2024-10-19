@@ -6,7 +6,8 @@
         "libft.h": "c",
         "type_traits": "c",
         "stdio.h": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "stdbool.h": "c"
     },
     "editor.autoClosingBrackets": "always"
 }
