@@ -97,7 +97,7 @@ void	lexer(t_global *g)
 	if (!check_syntax(g))
 	{
 		g->control = 0;
-		g->error_no = 258;
+		g->error_no = 2;
 		clean_list(&g->token_list);
 		remove_from_list(&g->garbage_list, g->command_line);
 		g->command_line = NULL;
