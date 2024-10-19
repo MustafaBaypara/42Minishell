@@ -40,25 +40,26 @@ char	**ft_split_first(const char *s, char c)
 	return (result);
 }
 
+// Token türünü belirler ve döndürür
 t_token_types	identifier(char *content)
 {
-	if (ft_strlen(content) == 1)
-	{
-		if (*content == '|')
-			return (PIPE);
-		else if (*content == '<')
-			return (RDR_OUT);
-		else if (*content == '>')
-			return (RDR_IN);
-	}
-	else if (ft_strlen(content) == 2)
-	{
-		if (*content == '<' && content[1] == '<')
-			return (HEREDOC);
-		if (*content == '>' && content[1] == '>')
-			return (RDRD_IN);
-	}
-	return (CMD);
+    if (ft_strlen(content) == 1)  // Eğer content'in uzunluğu 1 ise
+    {
+        if (*content == '|')  // Eğer content '|' karakteri ise
+            return (PIPE);  // PIPE döndür
+        else if (*content == '<')  // Eğer content '<' karakteri ise
+            return (RDR_OUT);  // RDR_OUT döndür
+        else if (*content == '>')  // Eğer content '>' karakteri ise
+            return (RDR_IN);  // RDR_IN döndür
+    }
+    else if (ft_strlen(content) == 2)  // Eğer content'in uzunluğu 2 ise
+    {
+        if (*content == '<' && content[1] == '<')  // Eğer content '<<' ise
+            return (HEREDOC);  // HEREDOC döndür
+        if (*content == '>' && content[1] == '>')  // Eğer content '>>' ise
+            return (RDRD_IN);  // RDRD_IN döndür
+    }
+    return (CMD);  // Yukarıdaki koşullardan hiçbiri sağlanmazsa CMD döndür
 }
 
 int	is_white_space(char c)

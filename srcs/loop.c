@@ -16,12 +16,13 @@
 
 static int	line_reader(t_global *g)
 {
+	// kullanıcıdan komut satırını okur ve g->command_line'a atar
 	g->command_line = readline("minishell> ");
 	if (!g->command_line)
 		return (rl_clear_history(), error_program("exit", g->error_no), (-1));
-	else if (!g->command_line[0])
+	else if (!g->command_line[0]) // komut satırı boşsa tekrar okur
 		return (free(g->command_line), 0);
-	else if (!check_space(g->command_line))
+	else if (!check_space(g->command_line)) // komut satırı boşluk ise tekrar okur
 		return (free(g->command_line), 0);
 	g->command_line = check_malloc(g->command_line);
 	add_history(g->command_line);

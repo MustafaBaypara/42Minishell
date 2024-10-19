@@ -94,6 +94,7 @@ void	parser(t_global *g)
 		return ;
 	i = 0;
 	token = g->token_list;
+	// komut listesi için token listesinden komutları ayırır
 	cmd = cmd_init(token);
 	g->cmd_list = cmd;
 	while (token)

@@ -67,6 +67,7 @@ void	init_global(t_global *g)
 	g->token_list = NULL;
 	g->cmd_list = NULL;
 	g->path = NULL;
+	g->tmp = NULL;
 	g->control = 1;
 	g->error_no = 0;
 	catch_signal(1);
@@ -77,12 +78,19 @@ int	main(int ac, char **av, char **env)
 	t_global	global;
 	char		**envtwo;
 
+	//global değişkenleri başlatır
 	init_global(&global);
+
+	//argüman kontrolü
 	if (ac != 1 || av[1])
 		error_program(ERROR_ARG, 1);
+	
+	//env kontrolü
 	if (!(*env))
 	{
 		envtwo = check_malloc(ft_calloc(2, sizeof(char *)));
+
+		//getcwd() ile çalışma dizinini alır
 		envtwo[0] = getcwd(NULL, 0);
 		if (!envtwo[0])
 			envtwo[0] = ft_strdup("PWD= ");
@@ -93,6 +101,8 @@ int	main(int ac, char **av, char **env)
 	}
 	else
 		global.env = env_dup(env);
+	
+	//global env değişkenine env listesini atar
 	global.the_env = list_to_char(global.env);
 	loop(&global);
 	rl_clear_history();
