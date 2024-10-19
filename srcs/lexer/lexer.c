@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/19 18:32:25 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	lexer(t_global *g)
 	if (!check_syntax(g))
 	{
 		g->control = 0;
-		g->error_no = 258;
+		g->error_no = 2;
 		clean_list(&g->token_list);
 		remove_from_list(&g->garbage_list, g->command_line);
 		g->command_line = NULL;
