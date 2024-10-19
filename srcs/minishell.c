@@ -6,11 +6,11 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 14:46:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/17 18:21:56 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/19 18:05:52 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 #include <unistd.h>
 #include <readline/readline.h>
 

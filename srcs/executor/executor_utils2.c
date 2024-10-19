@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:36 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/16 16:45:19 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 #include "sys/wait.h"
 #include "fcntl.h"
 #include <unistd.h>

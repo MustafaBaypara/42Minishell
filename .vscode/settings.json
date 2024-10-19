@@ -5,7 +5,8 @@
         "minishell.h": "c",
         "libft.h": "c",
         "type_traits": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "readline.h": "c"
     },
     "editor.autoClosingBrackets": "always"
 }
