@@ -101,4 +101,19 @@ int	rdr_position(t_command *cmds)
     fill_rds(cmds, tmp, &j);  // Yönlendirme operatörlerini ve diğer değerleri ayır
     cmds->value = tmp;  // Komutun değerlerini güncelle
     return (1);  // 1 döndür (başarılı)
+	
+// minishell> cat ls > asd.txt | echo "merhaba dostlar" > asd.txt
+// cmd->value[0]: cat
+// cmd->value[1]: ls
+// cmd->value[2]: (null)
+// cmd->rds[0]: >
+// cmd->rds[1]: asd.txt
+// cmd->rds[2]: (null)
+// cmd->value[0]: echo
+// cmd->value[1]: "merhaba dostlar"
+// cmd->value[2]: (null)
+// cmd->rds[0]: >
+// cmd->rds[1]: asd.txt
+// cmd->rds[2]: (null)
+
 }

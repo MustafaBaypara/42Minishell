@@ -108,21 +108,6 @@ void	parser(t_global *g)
 		token = token->next; // bir sonraki tokena geçer
 	}
 	rdr_position(cmd); // yönlendirme operatörlerini kontrol eder ve ayırır
-
-// minishell> cat ls > asd.txt | echo "merhaba dostlar" > asd.txt
-// cmd->value[0]: cat
-// cmd->value[1]: ls
-// cmd->value[2]: (null)
-// cmd->rds[0]: >
-// cmd->rds[1]: asd.txt
-// cmd->rds[2]: (null)
-// cmd->value[0]: echo
-// cmd->value[1]: "merhaba dostlar"
-// cmd->value[2]: (null)
-// cmd->rds[0]: >
-// cmd->rds[1]: asd.txt
-// cmd->rds[2]: (null)
-
 	if (!heredocs(g, g->cmd_list)) // heredoc varsa işler
 		g->control = 0;
 }
