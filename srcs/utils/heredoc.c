@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 14:22:39 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:43:36 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	*heredoc_expander(char *s, t_global *g)
             start = i; // Alt dizinin başlangıç indeksini ayarla
             while (s[i] && s[i] != '$') // '$' işaretine kadar veya stringin sonuna kadar ilerle
                 i++;
-            // Alt diziyi tmp'ye ekle
             tmp = check_malloc(ft_strjoin(tmp, check_malloc(ft_substr(s, start, i - start))));
         }
     }
@@ -54,7 +53,6 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
             close(fd[1]); // Pipe'in yazma ucunu kapat
             g->error_no = 0;
             error_program(0, g->error_no); // Hata programını çağır
-            break; // Döngüden çık
         }
         line = check_malloc(line); // Bellek kontrolü yap
         line = heredoc_expander(line, g); // Giriş satırını genişlet
