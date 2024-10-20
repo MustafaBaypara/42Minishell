@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:12:50 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 16:57:47 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:06:39 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ int	check_syntax(t_global *g)
 	t_list	*token;
 	size_t	i;
 	size_t	j;
-
 	// space cleaner fonksiyonu ile gereksiz boşlukları token listesinden temizler
 	space_cleaner(g, NULL);
 	token = g->token_list;
