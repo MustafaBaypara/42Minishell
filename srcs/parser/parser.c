@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:48:08 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:12:51 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	parser(t_global *g)
 	}
 	rdr_position(cmd); // yönlendirme operatörlerini kontrol eder ve ayırır
 	if (!heredocs(g, g->cmd_list)) // heredoc varsa işler
-		g->control = 0;
+		g->control = 0; // heredoc işlemi başarısız ise kontrolü kapatır diğer komutları yapmaz
 }
