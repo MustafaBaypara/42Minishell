@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 14:56:12 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:56:57 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ static int	expand(t_global *g, t_command *clst)
 	while (clst->value[i])
 	{
 		if (ft_strnstr(clst->value[i], "$", ft_strlen(clst->value[i])))
-			if (!dollar(g, &clst->value[i]))
-				return (1);
+			dollar(g, &clst->value[i]);
 		if (ft_strnstr(clst->value[i], "~", ft_strlen(clst->value[i])))
-			if (!home(g, &clst->value[i], 0, NULL))
-				return (1);
+			home(g, &clst->value[i], 0, NULL);
 		i++;
 	}
 	remove_empty_elements(clst->value);
@@ -66,11 +64,9 @@ static int	redirects(char **str, t_global *g, size_t *i)
 	char	*tmp;
 
 	if (ft_strnstr(str[*i + 1], "$", ft_strlen(str[*i + 1])))
-		if (!dollar(g, &str[*i + 1]))
-			return (1);
+		dollar(g, &str[*i + 1]);
 	if (ft_strnstr(str[*i + 1], "~", ft_strlen(str[*i + 1])))
-		if (!home(g, &str[*i + 1], 0, NULL))
-			return (1);
+		home(g, &str[*i + 1], 0, NULL);
 	if (!str[*i + 1][0])
 		return (-1);
 	tmp = quote_clean(str[*i + 1], 0, 0);
