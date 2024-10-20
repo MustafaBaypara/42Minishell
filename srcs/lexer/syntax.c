@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:12:50 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 18:48:16 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:47:21 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ int	check_syntax(t_global *g)
 
 	space_cleaner(g, NULL);
 	token = g->token_list;
-	if (!check_quote(token, 0, 0))
-		return (ft_putstr_fd("syntax error near unexpected quote.\n", 2), 0);
 	i = ft_lstsize(token);
 	j = i;
 	while (token)
 	{
+		if (!check_quote(token, 0, 0))
+			return (ft_putstr_fd("syntax error near unexpected quote.\n", 2), 0);
 		if (!check_pipe(token, i - j))
 			return (ft_putstr_fd("syntax error near unexpected token.\n", 2),
 				0);

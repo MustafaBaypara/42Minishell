@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 14:27:04 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:29:07 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ static int	heredoc_wait(t_global *g, t_command *cmd)
 
 static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 {
+	if (!d)
+	{
+		g->error_no = 12;
+		close(fd[0]);
+		close(fd[1]);
+		error_program(ERROR_MALLOC, 12);
+	}
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 		return (g->error_no = 1, error_program(ERROR_FORK, 1), 0);
