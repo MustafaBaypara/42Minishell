@@ -12,10 +12,9 @@
 
 #include "minishell.h"
 
-static void	space_cleaner(t_global *g)
+static void	space_cleaner(t_global *g, t_list *prev)
 {
 	t_list	*tmp;
-	t_list	*prev;
 	t_list	*head;
 
 	tmp = g->token_list;
@@ -29,7 +28,10 @@ static void	space_cleaner(t_global *g)
 			else
 				prev->next = tmp->next;
 			remove_from_list(&g->garbage_list, tmp);
-			tmp = prev->next;
+			if (prev)
+				tmp = prev->next;
+			else
+				tmp = g->token_list;
 		}
 		else
 		{
@@ -108,7 +110,7 @@ int	check_syntax(t_global *g)
 	size_t	i;
 	size_t	j;
 
-	space_cleaner(g);
+	space_cleaner(g, NULL);
 	token = g->token_list;
 	if (!check_quote(token, 0, 0))
 		return (ft_putstr_fd("syntax error near unexpected quote.\n", 2), 0);
