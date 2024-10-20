@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 10:53:06 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:10:06 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ static int	redirects(char **str, t_global *g, size_t *i)
 	if (ft_strnstr(str[*i + 1], "~", ft_strlen(str[*i + 1])))
 		if (!home(g, &str[*i + 1], 0, NULL))
 			return (1);
-	if (!str[*i + 1][0] || (ft_strnstr(str[*i + 1], " ", ft_strlen(str[*i + 1]))
-		&& !((ft_strnstr(str[*i + 1], "'", ft_strlen(str[*i + 1])))
-			|| (ft_strnstr(str[*i + 1], "\"", ft_strlen(str[*i + 1]))))))
+	if (!str[*i + 1][0])
 		return (-1);
 	tmp = quote_clean(str[*i + 1], 0, 0);
 	str[*i + 1] = tmp;
@@ -103,7 +101,7 @@ static int	rdr(t_global *g, t_command *clst)
 	}
 	return (0);
 }
-#include <stdio.h>
+
 void	expander(t_global *g)
 {
 	t_command	*cmd;
