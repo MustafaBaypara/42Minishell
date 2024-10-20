@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:35:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:55:22 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	check_hdoc(t_command *cmd)
 	int	i;
 	int	j;
 
-	catch_signal(5);
+	catch_signal(5); // main process için sinyal yakalamayı ignora et
 	j = 0;
-	while (cmd)
+	while (cmd) // Komut listesi boyunca döngüde heredoc kontrolü yapar
 	{
 		i = 0;
 		while (cmd->rds && cmd->rds[i])

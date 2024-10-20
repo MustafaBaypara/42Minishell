@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:42:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:59:34 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:33:30 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,22 @@
 
 void	ctrl_c(int num)
 {
-	(void)num;
-	ft_putchar_fd('\n', 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	_global(NULL)->error_no = 128 + num;
-	rl_redisplay();
+    (void)num; // 'num' parametresini kullanmadığımızı belirtmek için
+
+    // Yeni bir satır karakteri yazdır
+    ft_putchar_fd('\n', 1);
+
+    // Readline kütüphanesine yeni bir satırın başladığını bildir
+    rl_on_new_line();
+
+    // Mevcut satırı boş bir satırla değiştir
+    rl_replace_line("", 0);
+
+    // Global hata numarasını 128 + 'num' olarak ayarla
+    _global(NULL)->error_no = 128 + num;
+
+    // Readline kütüphanesini yeniden ekrana yazdır
+    rl_redisplay();
 }
 
 void	parent_sigint2(int sig)

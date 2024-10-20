@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 10:50:30 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 13:55:09 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,102 +18,128 @@
 
 static void	*heredoc_expander(char *s, t_global *g)
 {
-	size_t	i;
-	size_t	start;
-	char	*tmp;
+    size_t	i;      // Döngü için indeks değişkeni
+    size_t	start;  // Alt dizinin başlangıç indeksini tutar
+    char	*tmp;   // Geçici string değişkeni
 
-	i = 0;
-	tmp = check_malloc(ft_strdup(""));
-	while (s[i])
-	{
-		if (s[i] == '$')
-			tmp = dollar_sign(tmp, s, &i, g);
-		else
-		{
-			start = i;
-			while (s[i] && s[i] != '$')
-				i++;
-			tmp = check_malloc(ft_strjoin(tmp, \
-			check_malloc(ft_substr(s, start, i))));
-		}
-	}
-	return (tmp);
+    i = 0;
+    tmp = check_malloc(ft_strdup("")); // Boş bir string oluştur ve tmp'ye ata
+
+    while (s[i]) // Stringin sonuna kadar döngü
+    {
+        if (s[i] == '$') // Eğer karakter '$' ise
+            tmp = dollar_sign(tmp, s, &i, g); // '$' işaretini genişlet ve tmp'ye ata
+        else
+        {
+            start = i; // Alt dizinin başlangıç indeksini ayarla
+            while (s[i] && s[i] != '$') // '$' işaretine kadar veya stringin sonuna kadar ilerle
+                i++;
+            // Alt diziyi tmp'ye ekle
+            tmp = check_malloc(ft_strjoin(tmp, check_malloc(ft_substr(s, start, i - start))));
+        }
+    }
+    return (tmp); // Genişletilmiş stringi döndür
 }
 
 static void	on_heredoc(t_global *g, int *fd, char *d)
 {
-	char	*line;
+    char	*line;
 
-	while (1)
-	{
-		line = (readline("> "));
-		if (!line || (!ft_strncmp(line, d, ft_strlen(line)) \
-		&& !ft_strncmp(line, d, ft_strlen(d))))
-		{
-			close(fd[1]);
-			g->error_no = 0;
-			error_program(0, g->error_no);
-		}
-		line = check_malloc(line);
-		line = heredoc_expander(line, g);
-		if (!line)
-		{
-			g->error_no = 12;
-			close(fd[1]);
-			error_program(ERROR_MALLOC, g->error_no);
-		}
-		ft_putendl_fd(line, fd[1]);
-		rl_clear_history();
-	}
+    while (1)
+    {
+        line = (readline("> ")); // Kullanıcıdan giriş al
+        if (!line || (!ft_strncmp(line, d, ft_strlen(line)) \
+        && !ft_strncmp(line, d, ft_strlen(d))))
+        {
+            close(fd[1]); // Pipe'in yazma ucunu kapat
+            g->error_no = 0;
+            error_program(0, g->error_no); // Hata programını çağır
+            break; // Döngüden çık
+        }
+        line = check_malloc(line); // Bellek kontrolü yap
+        line = heredoc_expander(line, g); // Giriş satırını genişlet
+        if (!line)
+        {
+            g->error_no = 12;
+            close(fd[1]); // Pipe'in yazma ucunu kapat
+            error_program(ERROR_MALLOC, g->error_no); // Hata programını çağır
+            break; // Döngüden çık
+        }
+        ft_putendl_fd(line, fd[1]); // Satırı pipe'e yaz
+        rl_clear_history(); // Geçmişi temizle
+    }
 }
 
 static int	heredoc_wait(t_global *g, t_command *cmd)
 {
-	int	i;
+    int	i;
 
-	waitpid(cmd->pid, &i, 0);
-	if (WIFEXITED(i))
-	{
-		g->error_no = WEXITSTATUS(i);
-		if (g->error_no == 1)
-			return (g->error_no = 1, SIGINT);
-		else if (g->error_no == 12)
-			error_program(ERROR_MALLOC, 12);
-		else
-			g->error_no = WEXITSTATUS(i);
-	}
-	while (wait(NULL) != -1)
-		;
-	return (0);
+    // Çocuk sürecin tamamlanmasını bekle
+    waitpid(cmd->pid, &i, 0);
+
+    // Eğer çocuk süreç normal bir şekilde sonlandıysa
+    if (WIFEXITED(i)) // normal bir şekilde dönüp dönmediğini kontrol eder
+    {
+        // Çıkış durumunu al ve g->error_no'ya ata
+        g->error_no = WEXITSTATUS(i); // normal döndüyse çıkış durumunu alır
+
+        // Eğer çıkış durumu 1 ise, SIGINT döndür
+        if (g->error_no == 1)
+            return (g->error_no = 1, SIGINT);
+        // Eğer çıkış durumu 12 ise, bellek hatası programını çağır
+        else if (g->error_no == 12)
+            error_program(ERROR_MALLOC, 12);
+        // Diğer durumlarda, çıkış durumunu g->error_no'ya ata
+        else
+            g->error_no = WEXITSTATUS(i);
+    }
+
+    // Tüm çocuk süreçlerin tamamlanmasını bekle
+    while (wait(NULL) != -1)
+        ;
+
+    // Fonksiyon başarılı bir şekilde tamamlandığında 0 döner
+    return (0);
 }
 
 static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 {
-	if (!d)
-	{
-		g->error_no = 12;
-		close(fd[0]);
-		close(fd[1]);
-		error_program(ERROR_MALLOC, 12);
-	}
-	cmd->pid = fork();
-	if (cmd->pid == -1)
-		return (g->error_no = 1, error_program(ERROR_FORK, 1), 0);
-	else if (cmd->pid == 0)
-	{
-		catch_signal(4);
-		close(fd[0]);
-		on_heredoc(g, fd, d);
-	}
-	else
-	{
-		close(fd[1]);
-		if (heredoc_wait(g, cmd) == SIGINT)
-			return (close(fd[0]), SIGINT);
-		cmd->the_fd = dup(fd[0]);
-		close(fd[0]);
-	}
-	return (1);
+    // Eğer 'd' NULL ise, hata numarasını 12 yap ve pipe'ları kapat
+    if (!d)
+    {
+        g->error_no = 12;
+        close(fd[0]);
+        close(fd[1]);
+        error_program(ERROR_MALLOC, 12); // Hata programını çağır
+    }
+    
+    // Yeni bir süreç oluşturmak için fork() kullan
+    cmd->pid = fork();
+    
+    // Eğer fork() başarısız olursa
+    if (cmd->pid == -1)
+        return (g->error_no = 1, error_program(ERROR_FORK, 1), 0); // Hata numarasını 1 yap ve hata programını çağır
+    
+    // Eğer çocuk süreçte isek
+    else if (cmd->pid == 0)
+    {
+        catch_signal(4); // ctrlc gelirse newline ve process'i kapat
+        close(fd[0]); // Pipe'in okuma ucunu kapat
+        on_heredoc(g, fd, d); // Heredoc işlemini gerçekleştir
+    }
+    
+    // Eğer ana süreçte isek
+    else
+    {
+        close(fd[1]); // Pipe'in yazma ucunu kapat
+        if (heredoc_wait(g, cmd) == SIGINT) // Heredoc işleminin tamamlanmasını bekle
+            return (close(fd[0]), SIGINT); // Eğer SIGINT sinyali alınırsa, pipe'in okuma ucunu kapat ve SIGINT döndür
+        cmd->the_fd = dup(fd[0]); // Pipe'in okuma ucunun bir kopyasını oluştur ve cmd->the_fd'ye ata
+        close(fd[0]); // Pipe'in okuma ucunu kapat
+    }
+    
+    // Fonksiyon başarılı bir şekilde tamamlandığında 1 döner
+    return (1);
 }
 
 int heredocs(t_global *g, t_command *cmd)
@@ -143,7 +169,7 @@ int heredocs(t_global *g, t_command *cmd)
                 if (pipe(fd) == -1 || i++ == -1)
                     return (error_program(ERROR_PIPE, 1), 0);
 
-                // Yönlendirmeyi temizle
+                // Yönlendirmeyi tırnaklardan temizle
                 cmd->rds[i] = quote_clean(cmd->rds[i], 0, 0);
 
                 // Heredoc döngüsünü çalıştır ve sinyal kontrolü yap

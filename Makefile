@@ -30,7 +30,7 @@ SRCS			=	$(SRCS_DIR)loop.c $(SRCS_DIR)minishell.c \
 OBJS			=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
 
 CC				=	@cc
-CFLAGS			=	-Wall -Wextra -Werror $(INCLUDES)
+CFLAGS			=	$(INCLUDES)
 
 INCLUDES		=	-I ./include
 

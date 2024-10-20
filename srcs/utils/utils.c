@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:57:46 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:13:43 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	error_program(char *str, int err)
 
 	g = _global(NULL);
 	if (str)
-		printf("%s\n", str);
+		ft_putendl_fd(str, 2);
 	rl_clear_history();
 	clear_garbage(&g->garbage_list);
 	exit(err);

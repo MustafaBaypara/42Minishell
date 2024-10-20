@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:53:06 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,6 @@ void	expander(t_global *g)
 	cmd = g->cmd_list;
 	while (cmd)
 	{
-		printf("cmd->value[0]: %s\n", cmd->value[0]);
-		printf("cmd->value[1]: %s\n", cmd->value[1]);
-		printf("cmd->value[2]: %s\n", cmd->value[2]);
-		printf("cmd->rds[0]: %s\n", cmd->rds[0]);
-		printf("cmd->rds[1]: %s\n", cmd->rds[1]);
-		printf("cmd->rds[2]: %s\n", cmd->rds[2]);
 		if (expand(g, cmd))
 			return (g->error_no = 12, error_program(0, 12));
 		if (rdr(g, cmd))
