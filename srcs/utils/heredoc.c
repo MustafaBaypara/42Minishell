@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:50:30 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <readline/readline.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <signal.h>
 
 static void	*heredoc_expander(char *s, t_global *g)
 {
@@ -115,31 +116,46 @@ static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 	return (1);
 }
 
-int	heredocs(t_global *g, t_command *cmd)
+int heredocs(t_global *g, t_command *cmd)
 {
-	int	fd[2];
-	int	i;
+    int fd[2]; // Pipe için dosya tanımlayıcıları
+    int i;
 
-	if (check_hdoc(cmd) == 0)
-		return (1);
-	while (cmd)
-	{
-		i = -1;
-		while (cmd->rds && cmd->rds[++i])
-		{
-			if (!ft_strncmp(cmd->rds[i], "<<", 2))
-			{
-				if (cmd->the_fd != -1)
-					close(cmd->the_fd);
-				if (pipe(fd) == -1 || i++ == -1)
-					return (error_program(ERROR_PIPE, 1), 0);
-				cmd->rds[i] = quote_clean(cmd->rds[i], 0, 0);
-				if (loop_heredoc(g, fd, cmd, cmd->rds[i]) == SIGINT)
-					return (catch_signal(1), 0);
-			}
-		}
-		cmd->pid = -1;
-		cmd = cmd->next;
-	}
-	return (catch_signal(1), 1);
+    // Eğer heredoc kontrolü başarısız olursa, fonksiyon 1 döner
+    if (check_hdoc(cmd) == 0)
+        return (1);
+
+    // Komut listesi boyunca döngü
+    while (cmd)
+    {
+        i = -1;
+        // Komutun yönlendirmeleri boyunca döngü
+        while (cmd->rds && cmd->rds[++i])
+        {
+            // Eğer yönlendirme "<<" ile başlıyorsa
+            if (!ft_strncmp(cmd->rds[i], "<<", 2))
+            {
+                // Eğer daha önce bir dosya tanımlayıcı açıksa, kapat
+                if (cmd->the_fd != -1)
+                    close(cmd->the_fd);
+
+                // Pipe oluştur ve hata kontrolü yap
+                if (pipe(fd) == -1 || i++ == -1)
+                    return (error_program(ERROR_PIPE, 1), 0);
+
+                // Yönlendirmeyi temizle
+                cmd->rds[i] = quote_clean(cmd->rds[i], 0, 0);
+
+                // Heredoc döngüsünü çalıştır ve sinyal kontrolü yap
+                if (loop_heredoc(g, fd, cmd, cmd->rds[i]) == SIGINT)
+                    return (catch_signal(1), 0);
+            }
+        }
+        // Komutun pid'sini -1 yap
+        cmd->pid = -1;
+        // Bir sonraki komuta geç
+        cmd = cmd->next;
+    }
+    // Sinyal yakalama ve fonksiyonu başarıyla tamamlama
+    return (catch_signal(1), 1);
 }
