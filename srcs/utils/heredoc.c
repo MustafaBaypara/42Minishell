@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 13:55:09 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:22:39 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ static void	on_heredoc(t_global *g, int *fd, char *d)
         }
         line = check_malloc(line); // Bellek kontrolü yap
         line = heredoc_expander(line, g); // Giriş satırını genişlet
-        if (!line)
-        {
-            g->error_no = 12;
-            close(fd[1]); // Pipe'in yazma ucunu kapat
-            error_program(ERROR_MALLOC, g->error_no); // Hata programını çağır
-            break; // Döngüden çık
-        }
         ft_putendl_fd(line, fd[1]); // Satırı pipe'e yaz
         rl_clear_history(); // Geçmişi temizle
     }
@@ -104,15 +97,6 @@ static int	heredoc_wait(t_global *g, t_command *cmd)
 
 static int	loop_heredoc(t_global *g, int *fd, t_command *cmd, char *d)
 {
-    // Eğer 'd' NULL ise, hata numarasını 12 yap ve pipe'ları kapat
-    if (!d)
-    {
-        g->error_no = 12;
-        close(fd[0]);
-        close(fd[1]);
-        error_program(ERROR_MALLOC, 12); // Hata programını çağır
-    }
-    
     // Yeni bir süreç oluşturmak için fork() kullan
     cmd->pid = fork();
     
