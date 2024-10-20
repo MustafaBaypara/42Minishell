@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:50:22 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 18:48:07 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:51:13 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <readline/readline.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <signal.h>
 
 static void	*heredoc_expander(char *s, t_global *g)
 {
