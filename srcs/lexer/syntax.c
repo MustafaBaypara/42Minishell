@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:12:50 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:57:47 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,11 @@ static int	check_rdr(t_list *token, size_t i)
 
     if (token->next == NULL) // echo asd > | örneği
         return (0);  // Eğer bu son token ise ve yönlendirme türündeyse, 0 döndür
-
     else if (identifier(token->next->content) == PIPE) // echo < |
         return (0);  // Eğer bir sonraki token PIPE ise, 0 döndür
-
     else if (type == RDR_IN || type == RDRD_IN
         || type == RDR_OUT || type == HEREDOC) // echo < >> asd.txt
         return (0);  // Eğer bir sonraki token yönlendirme türündeyse, 0 döndür
-
     else if (i == 0 && token->next == NULL)  
         return (0);  // Eğer bu ilk token ise ve bir sonraki token yoksa, 0 döndür
 
@@ -129,12 +126,12 @@ int	check_syntax(t_global *g)
 	// space cleaner fonksiyonu ile gereksiz boşlukları token listesinden temizler
 	space_cleaner(g, NULL);
 	token = g->token_list;
-	if (!check_quote(token, 0, 0)) // Tek ve çift tırnak kontrolü yapar
-		return (ft_putstr_fd("syntax error near unexpected quote.\n", 2), 0); // Hata mesajı verir
 	i = ft_lstsize(token);
 	j = i;
 	while (token) // Pipe ve redirection kontrolü yapar
 	{
+        if (!check_quote(token, 0, 0)) // Tek ve çift tırnak kontrolü yapar
+		    return (ft_putstr_fd("syntax error near unexpected quote.\n", 2), 0); // Hata mesajı verir
 		if (!check_pipe(token, i - j)) // Pipe kontrolü yapar
 			return (ft_putstr_fd("syntax error near unexpected token.\n", 2),
 				0);

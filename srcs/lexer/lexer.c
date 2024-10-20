@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:47:05 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 16:47:51 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:56:37 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,7 @@ static void	lexer_definer(t_global *g, size_t i_len, size_t *j)
 		i++;
 	}
 }
-#include "stdio.h"
-void	printlist(void *asd)
-{
-	printf("%s\n", (char *)asd);
-}
+
 void	lexer(t_global *g)
 {
 	size_t	i_len;
@@ -107,7 +103,6 @@ void	lexer(t_global *g)
 		add_list(&g->token_list, check_malloc(ft_strdup(g->tmp)));
 		add_list(&g->garbage_list, ft_lstlast(g->token_list));
 	}
-	ft_lstiter(g->token_list, printlist);
 	// syntax kontrolü yapar
 	if (!check_syntax(g)) // olmazsa döngüye döner ve değişkenleri sıfırlar
 	{
@@ -118,6 +113,4 @@ void	lexer(t_global *g)
 		g->command_line = NULL;
 		g->token_list = NULL;
 	}
-	ft_putstr_fd("lexer\n", 1);
-	ft_lstiter(g->token_list, printlist);
 }

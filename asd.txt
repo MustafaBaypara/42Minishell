@@ -1,10 +1,1 @@
- 
-asdasdas
-asd.txt
-include
-libft
-ls
-Makefile
-minishell
-objs
-srcs
+merhaba2
