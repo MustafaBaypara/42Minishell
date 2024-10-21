@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:58:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 18:48:07 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:40:25 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	export_sync_env(t_command *cmd, t_global *g, char *key, int i)
 	char	*str;
 	char	*value;
 
+	if (cmd->value[i][0] == '_')
+		return (1);
 	str = check_malloc(ft_substr(cmd->value[i], 0, key - cmd->value[i]));
 	if (!ft_strlen(key))
 		value = check_malloc(ft_strdup(" "));
@@ -75,16 +77,19 @@ static void	export_declare(t_list *list, int fd)
 	while (print)
 	{
 		env = (t_env *)print->content;
-		ft_putstr_fd("declare -x ", fd);
-		ft_putstr_fd(env->key, fd);
-		if (env->value && env->value[0] != ' ')
+		if (env->key && env->key[0] != '_')
 		{
-			ft_putstr_fd("=\"", fd);
-			ft_putstr_fd(env->value, fd);
-			ft_putstr_fd("\"\n", fd);
+			ft_putstr_fd("declare -x ", fd);
+			ft_putstr_fd(env->key, fd);
+			if (env->value && env->value[0] != ' ')
+			{
+				ft_putstr_fd("=\"", fd);
+				ft_putstr_fd(env->value, fd);
+				ft_putstr_fd("\"\n", fd);
+			}
+			else
+				ft_putstr_fd("\n", fd);
 		}
-		else
-			ft_putstr_fd("\n", fd);
 		print = print->next;
 	}
 }
