@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:13 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 18:48:07 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:16:05 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,6 @@ void	close_fds(t_command *cmd, int i)
 	int	j;
 
 	j = 0;
-	if (i == -1)
-	{
-		while (cmd)
-		{
-			if (cmd->fd[1] != STDOUT_FILENO)
-				close(cmd->fd[1]);
-			if (cmd->fd[0] != STDIN_FILENO)
-				close(cmd->fd[0]);
-			cmd = cmd->next;
-		}
-		return ;
-	}
 	while (cmd && i > j)
 	{
 		if (cmd->fd[1] != STDOUT_FILENO)

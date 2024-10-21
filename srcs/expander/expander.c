@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/21 16:08:59 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:07:47 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ static int	rdr(t_global *g, t_command *clst)
 	while (clst->rds && clst->rds[i] && clst->rds[i + 1])
 	{
 		res = redirects(clst->rds, g, &i);
-		if (res == 1)
-			return (1);
 		if (res == -1)
 		{
 			clst->is_work = 0;
@@ -106,10 +104,8 @@ void	expander(t_global *g)
 	cmd = g->cmd_list;
 	while (cmd)
 	{
-		if (expand(g, cmd))
-			return (g->error_no = 12, error_program(0, 12));
-		if (rdr(g, cmd))
-			return (g->error_no = 12, error_program(0, 12));
+		expand(g, cmd);
+		rdr(g, cmd);
 		cmd = cmd->next;
 	}
 }

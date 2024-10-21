@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:09:07 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/21 16:46:49 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:03:50 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	home(t_global *g, char **value, size_t i, char *tmp)
 	str = *value;
 	while (str[i])
 	{
-		if (str[i] == '~' && !g->single_quotes && ! g->double_quotes)
+		if (str[i] == '~' && !g->single_quotes && !g->double_quotes)
 		{
 			if ((i > 0 && !is_white_space((str[i - 1])))
 				|| (!is_white_space(str[i + 1]) && str[i + 1] != '\0'

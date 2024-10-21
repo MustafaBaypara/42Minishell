@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:12:15 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/21 15:05:48 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:22:14 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	rdr_network(t_global *g, t_command **cmd)
 
 	i = 0;
 	while ((*cmd)->rds[i])
-	{
+	{	
 		if (files(*cmd, &i, -1) == -1)
 		{
 			(*cmd)->is_work = 0;
