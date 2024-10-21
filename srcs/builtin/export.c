@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:58:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/21 13:36:42 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:34:10 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ static int	valid_identifier(t_command *cmd, t_global *g, int i)
 	g->error_no = 1;
 	return (0);
 }
-#include <stdio.h>
+
 static int	export_sync_env(t_command *cmd, t_global *g, char *key, int i)
 {
 	char	*str;
 	char	*value;
 
-	if (cmd->value[i][0] == '_')
+	if (cmd->value[i][0] == '_') // ilk karakter _ ise bitir
 		return (1);
 	str = check_malloc(ft_substr(cmd->value[i], 0, key - cmd->value[i]));
 	if (!ft_strlen(key))
-		value = check_malloc(ft_strdup(" "));
+		value = check_malloc(ft_strdup(" ")); // eğer key boş ise value'yu boş yap
 	else
-		value = check_malloc(ft_strdup(key + 1));
-	sync_env(&g->env, str, value);
+		value = check_malloc(ft_strdup(key + 1)); // key'in bir sonrasını value yap
+	sync_env(&g->env, str, value); // env değişkenini senkronize et
 	return (1);
 }
-
+ 
 static int	export_command(t_command *cmd, t_global *g, int i)
 {
     char	*key; // Anahtar işaretçisi
@@ -70,11 +70,11 @@ static int	export_command(t_command *cmd, t_global *g, int i)
             continue; // Döngünün bir sonraki iterasyonuna geç
         }
         // Eğer '=' işareti bulunursa
-        else if (key)
+        else if (key) // = varsa
             // Ortam değişkenini senkronize et
             export_sync_env(cmd, g, key, i);
         // Eğer ortam değişkeni bulunamazsa
-        else if (!env)
+        else if (!env) // env yoksa yenisini ekler
             // Yeni ortam değişkeni ekle
             add_env(&g->env, cmd->value[i], NULL);
     }
@@ -116,14 +116,14 @@ int	export(t_command *cmd, t_global *g)
 	t_list	*export;
 
 	export = NULL;
-	if (!check_flag(cmd)) // flag kontrolü
+	if (!check_flag(cmd)) // bayrak kontrolü
 		return (g->error_no = 1, 1);
-	if (export_command(cmd, g, 0))
+	if (export_command(cmd, g, 0)) // export kontrolü
 		return (0);
-	g->the_env = list_to_char(g->env);
-	export = msh_lstcpy(g->env);
-	msh_lstsort(&export, NULL, NULL);
+	g->the_env = list_to_char(g->env); // env listesini char listesine çevirir the_env'e atar
+	export = msh_lstcpy(g->env); // yeni bir liste oluşturur
+	msh_lstsort(&export, NULL, NULL); // listeyi sıralar
 	if (!cmd->value[1])
-		export_declare(export, cmd->fd[1]);
+		export_declare(export, cmd->fd[1]); // sadece export ise yazdırır
 	return (1);
 }
