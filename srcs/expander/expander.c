@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:23:38 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 17:56:57 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:08:59 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ static int	rdr(t_global *g, t_command *clst)
 		if (res == -1)
 		{
 			clst->is_work = 0;
-			ft_putendl_fd("minishell: unexpected redirect", 2);
 			return (0);
 		}
 	}
