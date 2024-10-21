@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:13 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 21:46:25 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:02:21 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,28 +124,28 @@ int	is_command_ok(t_command *cmd, t_global *g)
 
 void	close_fds(t_command *cmd, int i)
 {
-	int	j;
+    int	j; // Döngü için indeks değişkeni
 
-	j = 0;
-	if (i == -1)
-	{
-		while (cmd)
-		{
-			if (cmd->fd[1] != STDOUT_FILENO)
-				close(cmd->fd[1]);
-			if (cmd->fd[0] != STDIN_FILENO)
-				close(cmd->fd[0]);
-			cmd = cmd->next;
-		}
-		return ;
-	}
-	while (cmd && i > j)
-	{
-		if (cmd->fd[1] != STDOUT_FILENO)
-			close (cmd->fd[1]);
-		if (cmd->fd[0] != STDIN_FILENO)
-			close(cmd->fd[0]);
-		j++;
-		cmd = cmd->next;
-	}
+    j = 0; // İndeksi sıfırla
+    if (i == -1) // Eğer i -1 ise, tüm dosya tanımlayıcılarını kapat
+    {
+        while (cmd) // Komut listesi boyunca döngü
+        {
+            if (cmd->fd[1] != STDOUT_FILENO) // Eğer çıkış dosya tanımlayıcısı standart çıkış değilse
+                close(cmd->fd[1]); // Çıkış dosya tanımlayıcısını kapat
+            if (cmd->fd[0] != STDIN_FILENO) // Eğer giriş dosya tanımlayıcısı standart giriş değilse
+                close(cmd->fd[0]); // Giriş dosya tanımlayıcısını kapat
+            cmd = cmd->next; // Bir sonraki komuta geç
+        }
+        return ; // Fonksiyondan çık
+    }
+    while (cmd && i > j) // Komut listesi boyunca ve j, i'den küçük olduğu sürece döngü
+    {
+        if (cmd->fd[1] != STDOUT_FILENO) // Eğer çıkış dosya tanımlayıcısı standart çıkış değilse
+            close(cmd->fd[1]); // Çıkış dosya tanımlayıcısını kapat
+        if (cmd->fd[0] != STDIN_FILENO) // Eğer giriş dosya tanımlayıcısı standart giriş değilse
+            close(cmd->fd[0]); // Giriş dosya tanımlayıcısını kapat
+        j++; // İndeksi artır
+        cmd = cmd->next; // Bir sonraki komuta geç
+    }
 }
