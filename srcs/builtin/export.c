@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:58:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/21 14:34:10 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:40:37 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	export_command(t_command *cmd, t_global *g, int i)
 
         // Ortam değişkenini bul
         env = env_finder(cmd->value[i]);
-
         // Eğer ilk karakter rakam veya '=' ise
         if (ft_isdigit(cmd->value[i][0]) || cmd->value[i][0] == '=')
         {
