@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:36 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 19:39:28 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:53:34 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,32 @@ void	catch_error(t_command *cmd, int i, t_global *g)
 
 void	wait_func(t_global *g, t_command *cmd)
 {
-	int	stat;
+    int	stat; // Çocuk sürecin durumunu tutmak için değişken
 
-	while (cmd && cmd->next)
-		cmd = cmd->next;
-	if (cmd && cmd->is_work)
-	{
-		waitpid(cmd->pid, &stat, 0);
-		if (cmd->pid != -1 && WIFEXITED(stat))
-			g->error_no = WEXITSTATUS(stat);
-		else if (cmd->pid != -1 && WIFSIGNALED(stat))
-			g->error_no = 128 + WTERMSIG(stat);
-	}
-	while (wait(NULL) != -1)
-		;
+    // Komut listesinin sonuna kadar ilerle
+    while (cmd && cmd->next)
+        cmd = cmd->next;
+
+    // Eğer komut geçerli ve çalıştırılabilir durumda ise
+    if (cmd && cmd->is_work)
+    {
+        // Çocuk sürecin tamamlanmasını bekle
+        waitpid(cmd->pid, &stat, 0);
+
+        // Eğer çocuk süreç normal bir şekilde sonlandıysa
+        if (cmd->pid != -1 && WIFEXITED(stat))
+            // Çıkış durumunu global hata numarasına ata
+            g->error_no = WEXITSTATUS(stat);
+
+        // Eğer çocuk süreç bir sinyal ile sonlandıysa
+        else if (cmd->pid != -1 && WIFSIGNALED(stat))
+            // Sinyal numarasını global hata numarasına ata
+            g->error_no = 128 + WTERMSIG(stat);
+    }
+
+    // Tüm çocuk süreçlerin tamamlanmasını bekle
+    while (wait(NULL) != -1)
+        ;
 }
 
 static int	check_file(t_command *cmd, int fd, int i)

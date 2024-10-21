@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:57:24 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:35:58 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	execute_builtin(t_command *cmd, int num,
 	t_global	*g;
 
 	g = _global(NULL);
-	if (!(*f)(cmd, g))
+	if (!(*f)(cmd, g)) // komut çalışmazsa
 		return (error_program(0, g->error_no), 1);
-	if (num)
+	if (num) // program birden fazla komut içeriyorsa
 		error_program(0, g->error_no);
 	return (0);
 }

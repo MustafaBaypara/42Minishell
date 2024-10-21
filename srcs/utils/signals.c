@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:42:53 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/20 21:49:02 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:23:01 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,16 @@ void	ctrl_c(int num)
 
 void	parent_sigint2(int sig)
 {
-	(void)sig;
-	ft_putchar_fd(('\n'), 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
+    (void)sig; // 'sig' parametresini kullanmadığımızı belirtmek için
+
+    // Yeni bir satır karakteri yazdır
+    ft_putchar_fd('\n', 1);
+
+    // Readline kütüphanesine yeni bir satırın başladığını bildir
+    rl_on_new_line();
+
+    // Mevcut satırı boş bir satırla değiştir
+    rl_replace_line("", 0);
 }
 
 void	heredoc_sig(int sig)

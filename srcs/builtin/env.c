@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakirca <abakirca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:44:06 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 17:45:48 by abakirca         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:43:34 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	put_env(t_list *lst, int fd)
 {
 	t_env	*env;
 
-	while (lst)
+	while (lst) // bütün listeyi dolaşır ve yazdırır
 	{
 		env = (t_env *)lst->content;
 		if (env->value && env->key && env->value[0] != ' ')
@@ -33,7 +33,7 @@ int	env(t_command *c, t_global *g)
 {
 	if (!check_flag(c))
 		return (g->error_no = 1, 1);
-	if (c->value[1])
+	if (c->value[1]) // argüman kontrolü
 	{
 		ft_putendl_fd("minishell: env: too many arguments", 2);
 		return (g->error_no = 1, 1);
