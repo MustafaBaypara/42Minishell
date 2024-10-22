@@ -6,7 +6,7 @@
 /*   By: mbaypara <mbaypara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:04:34 by mbaypara          #+#    #+#             */
-/*   Updated: 2024/10/19 18:48:07 by mbaypara         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:46:22 by mbaypara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	export_del(t_list **lst, char *str)
 		return (1);
 	env = (t_env *)tmp->content;
 	if (ft_strncmp(env->key, str, ft_strlen(str)) == 0)
-		return (*lst = tmp->next, 0);
+		return (*lst = tmp->next, 1);
 	while (tmp)
 	{
 		env = (t_env *)tmp->content;
